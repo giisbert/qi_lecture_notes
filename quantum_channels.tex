@@ -1,0 +1,291 @@
+When we introduced the basic steps which make up for a statistical experiment in 
+Chapter \ref{chap:stat_th}, we left out a very important basic building block -- evolution. Systems undergo state changes which alter their statistical properties before being registered. Such \emph{re-preparations} can result from an environmental influence ("noise"), or be an effect of a intentional modification ("processing"). 
+In this lecture, we identify the general class if maps which represent such changes of a systems state. First we remember the "evolutions" encountered in classical information theory.
+\begin{example}
+ In classical information theory, changes of the classical states ("classical channels") are usually described by \emph{stochastic matrices}\index{matrix!stochastic}  \index{stochastic matrix}. A stochastic matrix $W: \cX \rightarrow \cP(\cY)$ is an array $W = (W(y|x))_{x \in \cX, y \in \cY}$ such that $W(\cdot|x)$ is a probability distribution on $\cY$ for each $x \in \cX$. The set of stochastic matrices is convex with the extremal elements being the permutation matrices.
+\end{example}
+Heuristically speaking, we should demand from a "quantum channel", that it is linear and it should "map density matrices to density matrices". But things are not that simple, as we will see. In the next definition, we will use the map 
+\begin{align*}
+ \id_{\bbmC^l}: \ \cL(\cK) \rightarrow \cL(\cK), \hspace{.5cm} \id_{\cK}(A) = A &&(A \in \cL(\cK))
+\end{align*}
+\begin{definition}[c.p. map] \index{map!completely positive} \index{completely positive map} \index{map!positive} \index{positive map}
+A linear map  $\cT:\ \cL(\cH) \rightarrow \cL(\cK)$ is called 
+\begin{enumerate}
+ \item \emph{positive} if for each $A \in \cL(\cH)$, $A \geq 0$ also $\cT(A) \geq 0$ holds.
+ \item \emph{completely positive (c.p.)} if for each $l \in \bbmN$ the map 
+  $
+  id_{\cL(\bbmC^{l})} \otimes \cT
+  $
+ is positive. 
+\end{enumerate}
+\end{definition}
+At first sight, the distinction between positive and completely positive maps made above seems obsolete. As demonstrated by the following example, there are indeed maps which are positive -- but not completely! 
+\begin{example}[Partial transposition] \index{partial transposition} \label{example:partial_transposition}
+ The map $\cE: \cL(\bbmC^2) \rightarrow \cL(\bbmC^2)$,
+ $ 
+  \cE(A) := A^T
+ $
+ (the transposition being according to the canonical orthonormal basis) is positive, but not completely positive. 
+\end{example}
+We note, that from an operational point of view, we have to demand complete positivity rather than positivity when defining what a quantum channel is. Consider for instance a situation, where a system $A$ is processed with a map $\cT$ in a lab, while the overall state $\rho_{AE}$ of the composite system $AE$ including an additional environment system is not a product state (i.e. A is an "open system"). If $\cT$ is allowed to be an positive, but not c.p. map, it happens, that the global resulting state 
+$\rho'_{AE} := \id_E \otimes \cT(\rho)$ may not be a density matrix! 
+\begin{definition}[Quantum channel] \index{channel!quantum} \index{quantum channel} \label{def:quantum_channel}
+A linear map $\cT: \cL(\cH) \rightarrow \cL(\cK)$ is a called a \emph{quantum channel} \index{map!completely positive and trace preserving} \index{map!c.p.t.p.}, if it is 
+completely positive trace preserving (i.e. for each $A \in \cL(\cH)$, $\tr \cT(A) = \tr A$).
+ The set of quantum channels (or ``c.p.t.p. maps'') with input space $\cH$ and output space $\cK$ is denoted $\cC(\cH, \cK)$.
+\end{definition}
+A first set of prominent examples of quantum channels are 
+\begin{enumerate}
+ \item [a.)] \textbf{Isometric evolutions}. With an isometry $v \in \cL(\cH)$, the map
+ \begin{align}
+  \cV(a) := v a v^\ast &&(a \in \cL(\cH))
+ \end{align} 
+  is a channel. 
+ \item [b.)] \textbf{Partial traces}. The map $\tr_{\cK}: \cL(\cH \otimes \cL) \rightarrow \cL(\cH)$ as defined in the previous lecture is a channel.
+ \item [c.)] \textbf{Appending}. The map $\cN_{b}: \ \cL(\cH) \otimes \cL(\cH \otimes \cK)$, $a \mapsto a \otimes b$ is a channel for each $b \in \cS(\cK), \ b \geq 0$.
+\end{enumerate}
+Prominent examples for maps which are \textbf{not} channels are
+\begin{enumerate}
+ \item [d.)] \textbf{Transposition} (is not c.p., see Example \ref{example:partial_transposition})
+ \item [e.)] \textbf{Universal quantum copying device}. The map $T: \cL(\cH) \rightarrow \cL(\cH \otimes \cH)$, $\rho \mapsto \rho \otimes \rho$ is not a channel since it in not linear. \index{quantum!copying device}
+\end{enumerate}
+\begin{remark}
+	The unavailability of a universal quantum copying devices has severe impact on the conception of quantum communication systems. On one hand, it allows for very powerful protocols protecting information from eavesdropping. On the other hand, a "quantum internet" needs completely novel solutions to the problem of long-distance transmission. Read-and-repeat solutions as performed by nowadays "repeater stations" are "impossible machines" for quantum transmission!
+\end{remark}
+From first sight, the condition of complete positivity formulated in Definition \ref{def:quantum_channel} seems to be not very handy. To check if a map $\cT$ is completely positive, one would have to check if $\id_{\bbmC^l} \otimes \cT$ is positive for all $l \in \bbmN$ -- a rather hopeless task. Fortunately, there exist characterizations which are more easy to handle. The first one is given in the next theorem. 
+\begin{theorem}[Kraus decomposition] \label{theorem:kraus_decomposition} \index{Kraus!decomposition} \index{decomposition!Kraus}
+Let $n := \dim \cH$, $m := \dim \cK$. A linear map $\cT: \cL(\cH) \rightarrow \cL(\cK)$ 
+is completely positive if and only if it admits a representation of the form
+ \begin{align}
+  \cT(B) = \sum_{k=1}^N T_k B T_k^\ast &&(B \in \cL(\cH)) \label{theorem:kraus_decomposition_1}
+ \end{align}
+ with $T_1,\dots,T_N \in \cL(\cH, \cK)$. A representation as (\ref{theorem:kraus_decomposition_1}) is then always possible with $N \leq n^2 \cdot m^2$.  Moreover, $\cT$ is c.p.t.p. if and only if it is c.p. and 
+ $
+  \sum_{k =1}^N T_k^\ast T_k = \bbmeins_n
+ $
+ holds. 
+\end{theorem}
+\begin{proof}
+ We use the abbreviation $\bbmM_n := \bbmM_{n\times n}(\bbmC)$
+ We conduct our arguments mainly with matrices, i.e. $\bbmM_n = \cL(\cH), \ \bbmM_m = \cL(\cK)$. 
+ First we show that if $\cT$ admits a representation as in (\ref{theorem:kraus_decomposition_1}), it is completely positive. Let $l \in \bbmN$, $C \in \bbmM_l \otimes \bbmM_n$ a positive 
+ semidefinite matrix. 
+ From (\ref{theorem:kraus_decomposition_1}) we obtain the equality
+ \begin{align}
+  \id_{\bbmC^l} \otimes \cT(C) = \sum_{k=1}^N \bbmeins_{\bbmC^l} \otimes T_k C (\bbmeins_{\bbmC^l} \otimes T_k)^\ast. \label{theorem:kraus_decomposition_2}
+ \end{align}
+Notice, that $\bbmeins_{\bbmC^l} \otimes T_k X (\bbmeins_{\bbmC^l} \otimes T_k)^\ast$ is p.s.d. by positivity of $C$ and an application of the conjugation rule. Consequently  
+$
+  \id_{\bbmC^l} \otimes \cT
+ $
+ is a positive map by (\ref{theorem:kraus_decomposition_2}). \newline
+ We show the backwards implication (the possibility to represent $\cT$ as in (\ref{theorem:kraus_decomposition_1}) if it is c.p.) using the canonical orthonormal basis $\{\ket{e_i}\bra{e_i}\}$, since 
+ if we show 
+ \begin{align}
+   \cT(\ket{e_i}\bra{e_j}) = \sum_{k=1}^N T_k\ket{e_i}\bra{e_j} T_k^\ast \label{kraus_basis_equality}
+ \end{align}
+ for all $i, j \in [m]$ this implies the desired inequality by linearity. We use the linear isomorphism between $\bbmM_m \otimes \bbmM_n$ and the space $\bbmM_n(\bbmM_m)$ of block matrices with $n \times n$ blocks of size $m \times m$. This isomorphism is 
+ given by the map 
+ \begin{align*}
+  \Lambda&: \bbmM_n \otimes \bbmM_m \rightarrow \bbmM_n(\bbmM_m),  \\
+ \end{align*}
+ \begin{align}
+  \ket{e_i}\bra{e_j} \otimes \ket{e_l}\bra{e_r} \ \mapsto \ 
+  \left(
+	  \begin{array}{ccccc} 
+		  0 & \cdots & 0 					& \cdots & 0  \\ 
+		    & \cdots & \vdots 				& \cdots & 0  \\ 
+		    & \cdots & 0 					& \cdots & 0  \\ 
+		  0 & \cdots & \ket{e_i}\bra{e_j}	& \cdots & 0 \\
+				  \vdots &  \vdots & \vdots & \vdots & \vdots\\
+		  0 & \cdots & 0 & \cdots & 0  
+ \end{array}\right),
+ \end{align}
+  the nonzero block matrix entry above is in the $(l,r,)$ block coordinate. 
+  We consider the so-called \emph{Choi matrix} $C(\cT)$ of $\cT$,
+  \begin{align}
+   C(\cT) \ & 
+   = \ (\id_{\bbmC^n} \otimes \cT)\left[\sum_{i,j=1}^n \ket{e_i}\bra{e_j} \otimes \ket{e_i}\bra{e_j})\right] \ 
+   = \ \sum_{i,j=1}^n\ket{e_i}\bra{e_j} \otimes \cT(\ket{e_i}\bra{e_j})
+  \end{align}
+  which has, written as a block matrix, the form
+  \begin{align}
+  \Lambda(C(\cT)) \ = \ 
+  \left(\begin{array}{ccccc} 
+  \cT(\ket{e_1}\bra{e_1}) & \cdots & \cT(\ket{e_1}\bra{e_n})  \\ 
+  \vdots & \ddots  & \vdots  \\ 
+  \cT(\ket{e_n}\bra{e_1}) & \cdots &  \cT(\ket{e_n}\bra{e_n})  
+ \end{array}\right). 
+  \end{align}
+ The matrix 
+ \begin{align}
+  \sum_{i,j=1}^n \ket{e_i}\bra{e_j} \otimes \ket{e_i}\bra{e_j} 
+ \end{align}
+ is up to a positive scalar prefactor an orthogonal projector, and therefore positive semidefinite. Since $\cT$ is assumed to be completely positive, $C(\cT)$ 
+ is also p.s.d., and we can write $C(\cT)$ in spectral decomposition
+ \begin{align}
+  C(\cT) \ = \ \sum_{i=1}^N \lambda_i \ket{f_i}\bra{f_i} = \sum_{i=1}^N \ket{v_i}\bra{v_i}.
+ \end{align}
+  with $N = \rank C(\cT)$, and $v_i := \sqrt{\lambda_i} f_i$. We write
+  \begin{align*}
+   v_i \ = \ \sum_{j=1}^n \sum_{k=1}^m x_{jk}^{(i)} \ e_i \otimes e_k
+  \end{align*}
+  for each $i \in [N]$. Therefore, we have
+  \begin{align*}
+   \ket{v_i}\bra{v_i} \ 
+   &= \ \sum_{j,l = 1}^n \sum_{k, r = 1}^m x_{jk}^{(i)} \overline{x}_{lo}^{(i)} \ket{e_j}\bra{e_l} \otimes \ket{e_k} \bra{e_r} \\
+   &= \ \sum_{j,l=1}^n \ket{e_j}\bra{e_l} \otimes \left(\sum_{k,r=1}^m x_{jk}^{(i)} \overline{x}_{lr}^{(i)}  \ket{e_k}\bra{e_r}    \right) \\
+   &= \ \sum_{j,l=1}^n \ket{e_j}\bra{e_l} \otimes \ket{x_j^{(i)}} \bra{x_l^{(i)}},
+  \end{align*}
+  where we used the definition
+  \begin{align*}
+   x_j^{(i)} := \sum_{k=1}^n x_{jk}^{(i)} e_k.
+  \end{align*}
+   We have, 
+   \begin{align*}
+    \Lambda(\ket{v_i}\bra{v_i}) \ = \ 
+    \left(
+	    \begin{array}{ccccc} 
+		  \ket{x_1^{(i)}}\bra{x_1^{(i)}}& \cdots & \ket{x_1^{(i)}}\bra{x_n^{(i)}}  \\ 
+		  \vdots 						& \ddots & \vdots							\\
+		  \ket{x_n^{(i)}}\bra{x_1^{(i)}}& \cdots & \ket{x_n^{(i)}}\bra{x_n^{(i)}}  
+		\end{array}
+	\right). 
+  \end{align*}
+   If we now define matrices 
+   $
+    T_i = \left(x_1^{(i)} \cdots x_n^{(i)} \right),
+   $
+   it holds $T_i e_r = x^{(i)}_r$, i.e. 
+   \begin{align*}
+    T_i \ket{e_r}\bra{e_s} T_i^\ast \ = \ket{x_r^{(i)}}\bra{x_s^{(i)}}.
+   \end{align*}
+   Therefore, we have
+  \begin{align*}
+	   \Lambda(C(\cT)) 
+	   \ &= \ 
+	 \left(
+		\begin{array}{ccc} 
+				  \cT(\ket{e_1}\bra{e_1})	& \cdots & \cT(\ket{e_1}\bra{e_n}) 									 \\ 
+				  \vdots 					& \ddots & \vdots			\\
+				  \cT(\ket{e_n}\bra{e_1}) 	& \cdots & \cT(\ket{e_n}\bra{e_n})  
+		 \end{array}
+	 \right) \\
+	 & = 	\sum_{i=1}^N \Lambda(\ket{v_i}\bra{v_i})  \\
+	 & = 	\sum_{i=1}^N 
+			 \left(
+				 \begin{array}{ccc} 
+					  \ket{x_1^{(i)}}\bra{x_1^{(i)}} & \cdots & \ket{x_1^{(i)}}\bra{x_n^{(i)}}  \\ 
+					  \vdots & \ddots &  \vdots\\
+					  \ket{x_n^{(i)}}\bra{x_1^{(i)}} & \cdots & \ket{x_n^{(i)}}\bra{x_n^{(i)}}  
+				 \end{array}
+			\right) \\
+   \ 
+   &= \ 
+   \sum_{i=1}^N 
+	   \left(
+		   \begin{array}{ccc} 
+			  T_i\ket{e_1}\bra{e_1}T_i^{\ast} & \cdots & T_i\ket{e_1}\bra{e_n}T_i^\ast  \\ 
+			  \vdots & \ddots &   \vdots\\
+			  T_i\ket{e_n}\bra{e_1}
+			  T_i^\ast & \cdots &  T_i \ket{e_n}\bra{e_n} T_i^\ast
+		   \end{array}
+	   \right) 
+ \end{align*}
+  Comparing the coefficients of the matrices on both ends of the chain of equalities above shows (\ref{kraus_basis_equality}). \newline 
+  It remains to prove the second claim of the theorem. If $\cT$ is c.p.t.p. , it holds for each $i,j \in [n]$
+  \begin{align*}
+   \delta_{ij} \ 
+   & = \ \tr \ket{e_i}\bra{e_j} \\
+   & = \ \tr \cT(\ket{e_i}\bra{e_j}) \\
+   & = \ \tr \left(\sum_{k=1}^N T_k \ket{e_i} \bra{e_j} T_k^\ast \right) \\
+   & = \ \sum_{k=1}^N \tr(T_k^\ast T_k \ket{e_i} \bra{e_j}) \\
+   & = \ \braket{e_j, \sum_{k=1}^N T_k^\ast T_k e_i}. 
+  \end{align*}
+ \end{proof}
+	Next, we give a second characterization of completely positive maps. While a Kraus decomposition is a representation "on a lower layer" (a map between matrix spaces is represented by a matrix sum, the theorem below gives a representation on a "higher layer". A c.p. map is represented by a partial evolution derived from an isometric evolution on a larger space.
+  \begin{theorem}[Stinespring dilation] \label{thm:stinespring_dilation}
+   Let $\cT \in \cC(\cH, \cH')$ be a c.p. map. Then exists a representation of $\cT$ in terms of a linear map $v: \cL(\cH) \rightarrow \cL(\cH' \otimes \cK)$ with
+   % $\|v^\ast v\| = \|\cT(\bbmeins)\|$ and an %
+   additional Hilbert space $\cK$ such that 
+   \begin{align}
+    \cT(a) = \tr_{\cK}(v a v^\ast) &&(a \in \cL(\cH)). \label{stinespring_dilation_1}
+   \end{align}
+   holds. If $\cT$ is c.p.t.p., $v$ is an isometry. 
+  \end{theorem}
+  \begin{proof}
+   Since $\cT$ is completely positive there exists a Kraus decomposition with Kraus operators $T_1,\dots T_N$, $T_i \in \cL(\cH, \cH')$. Set $\cH_K := \bbmC^N$ and define 
+   \begin{align}
+    v = \sum_{k=1}^N T_k \otimes \ket{e_k}.
+   \end{align}
+   %In fact, an explicit calculation verifies, that $v$ fulfills the relation in Eq. (\ref{stinespring_dilation_1}). Moreover, it holds 
+   %\begin{align}
+   %  \|\cT(\bbmeins)\| = \|\sum_{k=1}^N T_kT_k^\ast\| = 
+   %\end{align}
+      We convince ourselves, that $v$ is in fact an isometry when $\cT$ is c.p.t.p. . We have to show, that 
+   \begin{align}
+    v^\ast v = \bbmeins_{\cH} \hspace{.5cm} \text{and} \hspace{.5cm} vv^\ast 
+   \end{align}
+   is a projection onto a subspace of $\cH' \otimes \cK$. This can be verified as follows. We have
+   \begin{align}
+    v^\ast v \ = \ \sum_{k,l=1}^N T_k^\ast T_l \cdot \braket{e_k,e_l} \ = \  \sum_{k=1}^N T_k^\ast T_k \ = \ \bbmeins_\cH.
+   \end{align}
+   On the other hand, $vv^\ast$ is clearly hermitian. That it is also idempotent can be seen directly via 
+   \begin{align}
+    (vv^\ast)^2 = v \underbrace{v^\ast v}_{=\bbmeins_\cH} v^\ast = vv^\ast. 
+   \end{align}
+   \end{proof}
+	
+\end{section}
+
+ \begin{section}{Exercises}
+%	\begin{exercise}
+%		Channel: convex, concatenation
+%	\end{exercise}
+%	\begin{exercise}
+%	Diamond norm
+%	\end{exercise}
+%	\begin{exercise}
+%	Computation of Kraus Operators (Heinosaari and Ziman, Ex. 4.67)
+ % 	\end{exercise} 
+  %	\begin{exercise}
+  %		SWAP
+  %	\end{exercise}
+  	\begin{exercise}\label{ex:h_s_adjoint}
+  	 The \emph{Hilbert Schmidt adjoint} \index{Hilbert-Schmidt adjoint} $\cN_{\ast}$ of a map $\cN: \cL(\cH) \rightarrow \cL(\cK)$ is the map, which fulfills 
+  	 \begin{align}
+		\tr(\cN(A^\ast)B) = \tr(A^\ast \cN_{\ast}(B)) 
+  	 \end{align}	
+  	 for all $A \in \cL(\cH)$, $B\in \cL(\cK)$. Show the following
+  	 \begin{enumerate}
+  	 	\item Complete positivity of $\cN$ implies complete positivity of $\cN_{\ast}$. 
+  	 	\item If $\cN$ is moreover trace preserving, $\cN_\ast$ has an additional property, which one? 
+  	 \end{enumerate}
+  	\end{exercise}
+  %	\begin{exercise}
+ % 		unitary gates
+  %	\end{exercise}
+  	
+  	
+  %	\begin{exercise}
+  %		Qubit channels
+  %	\end{exercise}
+  	
+  %	\begin{exercise}
+  %		Pauli Channels
+  %	\end{exercise}
+  	
+  %	\begin{exercise}
+  %		Depolarizing channel
+  %	\end{exercise}
+  	
+  %	\begin{exercise}
+  %		Heisenberg Picture
+  %	\end{exercise}
+  	
+  %	\begin{exercise}
+  %		Complementary Channel, Wiretap channel
+  %	\end{exercise}
+  	
+  	
+  \end{section}

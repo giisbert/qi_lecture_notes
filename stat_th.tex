@@ -1,0 +1,287 @@
+In this course, no prior familiarity with quantum theory is assumed. Since our main interest lies in doing information theory for quantum systems, we take a rather short route to get comfortable with the necessary quantum theoretic terminology. \newline 
+The approach which best fits our needs, is to regard quantum theory as a mathematical theory to describe the results of a certain type of "statistical" experiments. We already implicitly use such a \emph{statistical theory} ("classical probability theory" ) when considering classical Shannon theory. \newline
+The statistical structure of quantum theory arises from the evidence that microscopic objects (e.g. atoms, photons,...) tend to exhibit "random behaviour" in experiments. 
+Measurement outcomes fluctuate. However, the following assumption seems to be justified.
+\begin{itemize} %\index{statistical axiom}
+	\item If a measurement is performed on independent and equally prepared systems in the same condition many times, the relative frequencies 
+	\begin{align*}
+	f_i := \frac{\text{number of occurencies of the measurement value} \ i}{\text{number of total measurements}}
+	\end{align*}
+	stabilize (i.e. converge to "probabilities")
+\end{itemize}
+The above assumption characterizes the hard core of a statistical theory. We will see that there are additional properties a statistical theory should have, and of course there is need to specify, what "measurement", "independent", and "equally prepared"  means. \newline 
+It turned out, that the usual "probability theory" used for describing random experiments with coins (and more complex situations) does not suffice
+to correctly model some experiments with systems like atoms, photons. \newline 
+In the next section, we introduce framework which formulates the specifications of \emph{statistical theory} - in generality sufficient to describe the classical and quantum theories.
+\begin{section}{Statistical theories - A general framework}
+A real-world statistical experiment is usually divided into two steps
+\begin{enumerate}
+ \item[(i)] \textbf{Preparation:} Setting a preparation "$P$" to fix the "initial conditions" of the experiment. Examples 
+ \begin{itemize}
+ \item producing a dice, throwing the dice
+ \item filling an urn with a number of balls having each having some letter in $A..Z$, blindly take a ball from the urn
+ \item setting up a certain laser configuartion for single photon production
+ imprinted.
+ \end{itemize} 
+  \item[(ii)] \textbf{Registration:} Setting a registration "$R$", i.e. rules how observations are made. Here we assume the most basic type of observation - a "yes/no"-measurement: the registration which one of two given alternatives is taking place. E.g.: 
+   \begin{itemize}
+   	\item observing if the number showing up on the dice is odd or even
+   	\item observing, whether or not the letter $A$ is printed on the ball
+   	\item setting up a semipermeable plate in the laser beam and record whether it went through the plate or not.
+   \end{itemize}
+\end{enumerate}
+Usually, in a statistical context, the experiment is performed many times (lets say a large number $N$ of times), the next step is calculating \textbf{relative frequencies}. If $N_i$ is the number of registrations of the $i$th alternative, the relative frequencies are
+	\begin{align*}
+	f_1 \ = \ \frac{N_1}{N}, \hspace{.3cm}\text{and} \hspace{.5cm} f_2 \ = \ \frac{N_2}{N} = 1 - f_1
+	\end{align*}
+Having the statistical postulate from the preceding paragraph in mind, we assume, that the relative frequencies stabilize (i.e. converge) in the limit $N \rightarrow \infty$.\newline  
+\textbf{Assumption}: There is a number $p(P,R)$ -- the \emph{probability} of registration. 
+\newline 
+In order to theoretically describe a certain type of experiment, we form equivalence classes,
+i.e. we say two preparation procedures $P_1$ and $P_2$ are equivalent, if they lead to the same probabilities for all registration procedures, i.e. $p(P_1,R) = p(P_2, R)$ for all possible $R$. Two registration procedures $R_1, R_2$ are equivalent, if $p(P,R_1) = p(P,R_2)$ for all preparation procedures $P$. We call each equivalence class of preparation procedures a \emph{state}, and each equivalence class of registration procedures an \emph{effect}. 
+\begin{enumerate}
+	\item [(iv)] \textbf{Theoretical description:} A statistical theory is given by a set $\fS$ of states and a set $\fE$ of effects together with a map $p: \ \fS \times \fE \rightarrow [0,1]$, \ $(s, E) \mapsto p(s,E)$ with
+	\begin{align*}
+	 p(s_1,E) &= p(s_2,E) \ \text{for all} \ E \in \fE \Rightarrow s_1 = s_2 \\ 
+	 p(s,E_1) &= p(s,E_2) \ \text{for all} \ s \in \fS \Rightarrow E_1 = E_2 
+	\end{align*}
+	we denote the \emph{certain} effect by $\bbmeins$ (i.e. $\bbmeins$ is the unique effect with $p(s, \bbmeins) = 1$ for all states)
+\end{enumerate}  
+Before we proceed with our exposition of statistical theories, we give the two examples which will be of interest in this course. The first one describes experiments with a "classical system", while the second, regards a "quantum system". 
+\begin{example}[Classical statistics]
+	Let $\Omega$ be a finite sample set. The statistical theory usually imposed is given by the state set $\fS := \cP(\cX)$, and effect set $\fE := \fE(\Omega)$ with
+	\begin{align*}
+	  \cP(\Omega) 
+		  &:= \left\{ q: \Omega \rightarrow [0,1]: \ \sum_{\omega\in \Omega}q(\omega) = 1 \right\} \\
+	  \cE(\Omega)
+		  &:= \left\{f: \Omega \rightarrow [0,1]: 0 \leq f(\omega) \leq 1 \ \text{for all} \ \omega \in \Omega   \right\}.
+	\end{align*}
+	The probability to register the effect $E \in \fE$ when preparing with $q \in \cS$ is
+	\begin{align*}
+	p(q,E) \ := \ \sum_{\omega \in \Omega} q(\omega) \cdot f(\omega)
+	\end{align*}
+\end{example}
+Note that in the traditional formulation of probability theory after Kolmogorov, rather \emph{events} are considered instead of effects. This approach is recovered by restricting the registration effects to the set
+\begin{align*}
+\left\{\bbmeins_A: \ A \subset \Omega  \right\} \ \subsetneq \ \fE(\Omega),
+\end{align*}
+where $\bbmeins_A$ is the indicator function of $A$, i.e. 
+\begin{align*}
+  \bbmeins_A(\omega) \ := \ 
+  \begin{cases}
+	  1 	&\text{if} \ \omega \in A \\
+	  0  	&\text{otherwise}
+  \end{cases}
+\end{align*}	
+By using the broader concept of effects, we allow also "fuzzy" registrations. 
+\begin{example}[Quantum statistics]
+Consider a finite-dimensional Hilbert space $\cH = \bbmC^d$, $d < \infty$, the usual statistical model for a quantum system with $d$ degrees of freedom is given by the state set $\fS := \cS(\cH)$, and $\fE := \cE(\cH)$, where 
+\begin{align*}
+	\cS(\cH) \
+	&:= \ \{\rho \in \cL(\cH): \ \rho^\ast = \rho \wedge \rho \geq 0 \wedge \tr\rho = 1\} &\text{(density matrices)}\\
+	\cE(\cH) \
+	&:= \ \{E \in \cL(\cH): \ 0 \leq E \leq \bbmeins \} 
+	&\text{(quantum effects)}
+\end{align*} 
+ Moreover, for given density matrix $\rho$, and effect $E$, the probability of registration is  calculated via the formula
+ \begin{align*}
+  p(\rho, E) = \tr \rho E &&\text{(Born's rule)}.
+ \end{align*}
+\end{example}
+ We consider some more aspects of the notions we just introduced.  \newline 
+\textbf{Convexity:} When conducting statistical experiments, there usually also is the principal possibility to \emph{mix} preparation procedures as well as registration procedures. For example, when having two preparation devices $P_1, P_2$ at hand, one could let a random number generator decide which one of these to take for the next sample. If $\lambda$ is the probability, that $P_1$ is chosen, it makes sense to demand, that the resulting preparation procedure $\tilde{P}$ is also allowed, and fulfills
+ \begin{align}
+	p(\tilde{P}, E) = \lambda \cdot p(P_1, R) + (1-\lambda) \cdot p(P_2,R) \label{mixture_of_preparations}
+ \end{align} 
+ for each registration procedure $R$. Formulating this equation on the level of states and effects, we have
+ \begin{align}
+    \lambda p(\rho_1, E) + (1-\lambda) p(\rho_2,E) \ 
+    &= \lambda \tr \rho_1 E + (1-\lambda) \tr\rho_2 E \\
+    &= \tr(\lambda \rho_1 + (1-\lambda)\rho_2)E,
+ \end{align}  
+ i.e. the state corresponding to a mixture of states $\rho_1, \rho_2$ with mixing parameter $\lambda$ is the corresponding convex combination $\lambda \rho_1 + (1-\lambda) \rho_2$ for each effect $E$. \newline 
+ A similar argument can be drawn for mixtures of effects. In consequence, the sets $\cS(\cH)$ and $\cE(\cH)$ are convex subsets of a linear space!
+  It is of interests to know the extremal elements of a convex set (i.e. the elements which are not nontrivial convex combinations of other elements of that set). The extremal elements of the set $\fS$ are called \emph{pure states} (accordingly, states which are not pure are called \emph{mixed} \index{mixed state}), while the extremal elements of $\fE$ are called \emph{propositions}. In case of quantum theory, we have
+ \begin{proposition}
+  Let $\cH$ be (finite dimensional) Hilbert space. The following claims hold. 
+  \begin{enumerate}
+   \item $\rho \in \cS(\cH)$ is a pure state if and only if it is a rank one projection.
+   \item $E \in \cE(\cH)$ is a proposition if and only if it is a projection.
+  \end{enumerate} 
+ \end{proposition}
+  \begin{proof}
+  	We show the first claim. The second can be proven by similar arguments. We first show the "$\Rightarrow$" implication. Assume, that $\rho$ is a rank one projection, i.e. it holds
+  	%\begin{align}
+  	$ \rho^2 = \rho$. 
+  	%\end{align}
+  	We show, that any convex combination 
+  	\begin{align*}
+  	\rho = \mu \tau_1 + (1-\mu) \tau_2 \label{thm:density_convexity_2}
+  	\end{align*}
+  	is necessarily trivial. It holds
+  	\begin{align*}
+  	\rho - \rho^2  
+  	&= \mu \tau_1 + (1-\mu) \tau_2 - \mu^2 \tau_1^2 - \mu(1-\mu) (\tau_1 \tau_2 + \tau_2 \tau_1) - (1-\mu)^2 \tau_2^2 \\
+  	&= \mu (\tau_1 - \tau_1^2) + (1- \mu) (\tau_2 - \tau_2^2) + \mu(1-\mu) (\tau_1 - \tau_2)^2 \\
+  	&\geq \mu(1-\mu)^2 (\tau_1 - \tau_2)^2 \\
+  	&\geq 0.
+  	\end{align*}
+  	The equalities above are by rearranging terms. The first inequality above (notice: the inequality is a matrix inequality in the hermitian semiorder) is by
+  	the fact, that $\mu$ and $1 -\mu$ are nonnegative and $(\tau_1 - \tau_1^2)$ as well as $\tau_2 - \tau_2^2$ are positive semidefinite matrices (check this.) 
+  	The second inequality follows, because $(\tau_1 - \tau_2)^2$ is positive semidefinite. Since $\rho - \rho^2 = 0$ ($\rho$ is assumed to be a projections),
+  	it holds 
+  	\begin{align}
+  	\mu (1 - \mu) (\tau_1 - \tau_2)^2 = 0.
+  	\end{align}
+  	But this is only possible if $\mu \in \{0,1\}$ or $\tau_1 = \tau_2$, which is the case if and only if the convex combination in Eq. (\ref{thm:density_convexity_2})
+  	is trivial. \newline 
+  	For the showing remaining "$\Leftarrow$" implication, let $\rho$ be an extremal element of $\cS(\cH)$. Consider a spectral decomposition 
+  	\begin{align}
+  	\rho = \sum_{i=1}^{\dim \cH} \lambda_i \ket{\psi_i}\bra{\psi_i}
+  	\end{align}
+  	of $\rho$. Notice that this is a convex combination of $\rho$. Since $\rho$ is assumed to be extremal there is exactly one $i_0$ with $\lambda_{i_0} =1$, while $\lambda_i = 0$
+  	for all $i \neq i_0$. Consequently
+  	$\rho = \ket{\psi_{i_0}}\bra{\psi_{i_0}}$,
+  	a rank one projection.
+  \end{proof}
+  \begin{remark}
+  	Each unit vector $v \in \cH$ gives rise to a pure state $\rho = \ket{v}\bra{v}$. 
+  	the correspondence $v \leftrightarrow \ket{v}\bra{v}$ is one-to-one up to global phases, i.e. for $\theta \in \bbmR$, $v$ and $e^{i\theta} v$ give rise to the same pure 
+  	state. 
+  \end{remark}
+   To describe statistical experiments with more than two outcomes, we introduce the concept of an observable. An \emph{observable} (or \emph{measurement}) \index{observable} \index{measurement} with a (finite) set $\cY$ of measurement outcomes is a function $F: \cY \rightarrow \fE$ such that 
+   \begin{align}
+    \sum_{y \in \cY} E_y \ = \ \bbmeins
+   \end{align}
+	Since the set of measurement values is finite, it is more common to define a measurement by a collection of effects. In case of quantum theory, we define
+   \begin{definition}
+   	 Let $\cH$ be a finite dimensional Hilbert space, and $\cY$ be a finite set. A POVM (positive operator valued measure) on $\cH$ with measurement outcomes in $\cY$ is a family $\{E_y\}_{y \in \cY}$ such that 
+   	 \begin{enumerate}
+   	 	\item $0 \leq E_y \leq \bbmeins_\cH$ for all $y \in \cY$
+   	 	\item $\sum_{y \in \cY} E_y = \bbmeins_\cH$. 
+   	 \end{enumerate}
+   	 The special case, of a family of mutually orthogonal projections in $\cH$ is called \emph{projection valued measure (PVM)} or simply \index{projection valued measure}  \emph{von Neumann measurement} \index{measurement!von Neumann}.
+   \end{definition}
+	In this course we restrict ourselves to finite dimensional Hilbert spaces and finite sets of measurement values, which avoids topological and measure theoretic issues. The interested reader may consult the following references for more details. 
+\begin{enumerate}
+ \item K. Kraus, \emph{States, Effects and Operations}, Springer, 1983
+ \item A. Holevo, \emph{Quantum Systems, Channels, Information}, de Gruyter, 2012, Chapter 2.
+ \item A. Holevo, \emph{Probabilistic and Statistical Aspcects of Quantum Theory}, Edizione de Scuola Normale Superiore Pisa, 2011, Chaper 1
+ \item S. Gudder, \emph{Stochastic Methods of Quantum Mechanics}, Dover Publications, 2005, Chapter 4
+ \end{enumerate}
+\end{section}
+
+\begin{section}{Example: Qubit systems} \index{qubit}
+  To get into calculations with the mathematical objects defined above, we consider the case of a quantum system with two degrees of freedom, i.e. the underlying Hilbert space is two-dimensional.
+  Despite the fact, that such systems are often considered in physics\footnote{Real-world examples of such systems are e.g. the spin of an electron system or the polarization of light.}, they can be 
+  regarded as quantum counterparts of classical bit systems bit systems with alphabet $|\cX| = 2$. The set $\cS(\bbmC^2)$ of qubit states has a convenient pictoral representation in $\bbmR^3$, which we derive 
+  next. The matrices
+  \begin{align*} \index{Pauli matrices}
+   \sigma_0 &=  \left(\begin{array}{c c} 1 & 0 \\ 0 & 1 \end{array}\right)  \hspace{.5cm}
+   \sigma_1 =  \left(\begin{array}{c c} 0 & 1 \\ 1 & 0 \end{array}\right) \\
+   \sigma_2 &=  \left(\begin{array}{c c} 0 & - i \\ i & 0 \end{array}\right) \hspace{.5cm}  
+   \sigma_3 =  \left(\begin{array}{c c} 1 & 0 \\ 0 & -1 \end{array}\right)  
+  \end{align*}
+  are called \emph{Pauli matrices} and form an orthogonal basis in $\cL(\bbmC^2)$, it holds  
+  \begin{align}
+    \braket{\sigma_i, \sigma_j}_{HS} =  2 \delta_{ij}.
+  \end{align}
+  If we normalize each of the matrices with a factor $1/\sqrt{2}$ we obtain an orthonormal basis. We can write each matrix $A \in \cL(\cH)$ as a linear combination
+  \begin{align}
+   A = \frac{1}{2} \sum_{i=0}^3 r_i \sigma_i. \label{bloch_linear_comb} 
+  \end{align}
+   with $r_i = \braket{A, \sigma_i}_{HS}$. We aim to derive conditions on the numbers $r_0,\dots,r_3$ being equivalent to $A \in \cS(\cH)$. We have
+   \begin{enumerate}
+    \item Each $r_i$ has to be real, because $A$ is Hermitian. 
+    \item $r_0 = 1$ holds because of the property $\tr(A) = 1$. 
+    \item Since $A \geq 0$ holds, 
+     \begin{align}
+      \frac{1}{4}(r_0^2 - r_1^2 - r_2^2 - r_3^2) = \det A \geq 0.
+     \end{align}
+     Since $r_0 = 1$, we obtain the condition $\|r\| \leq 1$ for the vector $(r_1,r_2,r_3)^T \in \bbmR^3$. 
+   \end{enumerate}
+   On the other hand, if $A$ is represented as in (\ref{bloch_linear_comb}) with $r_0 = $ and $(r_1,r_2,r_3)^T$ an element of $B_1(0)$, the euclidean ball around $0$ with radius one, then $A \in \cS(\cH)$ is 
+   implied. Indeed, $1 = r_0 = \tr A$, and $\det A = 1 - r_1^2 - r_2^2 - r_3^2 \geq 0$. Consequently, $A$ is a density matrix. Since the basis coefficients $r_0,r_1,r_2,r_3$ of an element of $\cL(\cH)$
+   are unique, the map which connects each density matrix with its bloch vector $(r_1,r_2,r_3)^T$ is a one-to-one. By linearity of the Hilbert-Schmidt scalar product, it is clear that this map is also 
+   affine. Therefore, we have introduced an affine bijection of $\cS(\cH)$ onto the radius one euclidean ball in $\bbmR^3$. By this fact, it is clear, that the set of extremals of $\cS(\cH)$ correspond to
+   the set of extremals of $B_1(0)$, i.e. the unit sphere around $0$ in $\bbmR^3$.
+   \begin{remark}
+    In quantum optics, it is common, to specify the polarization preparation of a leaser beam by giving the corresponding bloch vector $r = (r_1,r_2,r_3)^T$. Examples are (according to www.wikipedia.de)
+    \begin{align*} 
+    &  \left(\begin{array}{c} 1 \\ 0 \\ 0 \end{array}\right) \hspace{.5cm} \text{(linear horizontal)}  
+    & \left(\begin{array}{c} -1 \\ 0 \\ 0 \end{array}\right) \hspace{.5cm} \text{(linear vertical)}   \\
+    &  \left(\begin{array}{c} 0 \\ 1 \\ 0 \end{array}\right) \hspace{.5cm} \text{(linear 45}^{\circ}\text{)}  
+    & \left(\begin{array}{c} 0\\ -1 \\ 0 \end{array}\right) \hspace{.5cm} \text{(linear -45}^{\circ}\text{)}  \\ 
+    &  \left(\begin{array}{c} 0 \\ 0 \\ 1 \end{array}\right) \hspace{.5cm} \text{(right circular)}  
+    & \left(\begin{array}{c} 0\\ 0 \\ -1 \end{array}\right) \hspace{.5cm} \text{(left circular)}   \\
+    & \left(\begin{array}{c} 0\\ 0 \\ 0 \end{array}\right) \hspace{.5cm} \text{(unpolarized)}.   
+    \end{align*}
+   \end{remark}
+   By calculating their bloch vectors, one can verify, that the pure states $P_i := \ket{e_i}\bra{e_i}$, $i \in \{0,1\}$ are located at the north and south poles of the Bloch ball. The set of states 
+   which lie on the straight line connecting the pure states $P_0$ and $P_1$ are parameterized by probability distributions on $\{0,1\}$, 
+   \begin{align*}
+    \left\{P(p) := p(0) P_0 + p(1) P_1\right\}.
+   \end{align*}
+   In fact, each straight line connecting two antipodes on the Bloch sphere can be regarded as a version of the classical bit states. 
+   %Proceeding with this discussion, we observe an essential difference between
+   %the set of bit and the set of qubit states. ???
+   
+  % \begin{exercise}
+  %  Calculate the Bloch vectors of the states $P_{\pm} := \ket{f_\pm} \bra{f_\pm}$ where
+  %  \begin{align*}
+  %   f_{\pm} := \tfrac{1}{\sqrt{2}}(e_0 \pm e_1).
+  %  \end{align*}
+  %  Where are their images located on the Bloch ball?
+  % \end{exercise}
+ %\end{section}
+
+  
+  %\begin{section}{Exercises}
+   
+   %\begin{exercise}
+   %	compatibility
+   %\end{exercise}
+   
+   %\begin{exercise} 
+   % Prove, that the set of POVMs on a Hilbert space all indexed by the same alphabet form a convex set.
+   %\end{exercise}
+   
+   %\begin{exercise}
+   % Consider the set of probability distributions $\cP(\cX)$ on the alphabet $\cX := \{1,2,3\}$ find a useful geometric picture in $\bbmR^3$. 
+   %\end{exercise}
+   
+   %\begin{exercise}
+   % Where are the pure qubit states located in the Bloch ball, where the maximally mixed state 
+   % \begin{align}
+   %  \pi_2 := \left(\begin{array}{cc} 
+   %          \tfrac{1}{2} & 0 \\
+   %           0 	& \tfrac{1}{2}
+   %         \end{array} \right)
+   % \end{align}
+   %\end{exercise}
+   
+   %\begin{exercise}
+    %Consider the orthonormal basis $\cB := \{f_+, f_-\}$ defined by
+    %\begin{align}
+    % f_{+} := \tfrac{1}{\sqrt{2}}(e_0 + e_1) \hspace{.3cm} \text{and} \hspace{.3cm} f_{-} := \tfrac{1}{\sqrt{2}}(e_0 - e_1).
+   % \end{align}
+   % Calculate the Bloch vectors $r_1,r_2,r_3$, and draw them into the Bloch ball picture. 
+   %\end{exercise}
+   %\begin{exercise}
+   	%Show, that two mixtures
+   	%\begin{align}
+   	% \sum_{i=1}^I \lambda_i \ket{\psi_i}\bra{\psi_i} \hspace{.2cm} \text{and} \hspace{.2cm} \sum_{j=1}^J \mu_i \ket{\phi_j}\bra{\phi_j}
+   	%\end{align}
+   	%are pure state decompositions of the same density matrix if and only if 
+   	%...
+   %\end{exercise}
+
+ % \end{section}
+
+
+
+
+
+
+
+

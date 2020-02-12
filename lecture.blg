@@ -1,0 +1,48 @@
+This is BibTeX, Version 0.99d (TeX Live 2019/Debian)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: lecture.aux
+The style file: plain.bst
+Database file #1: references.bib
+Warning--empty journal in bjelakovic12a
+You've used 3 entries,
+            2118 wiz_defined-function locations,
+            510 strings with 4322 characters,
+and the built_in function-call counts, 689 in all, are:
+= -- 60
+> -- 27
+< -- 0
++ -- 11
+- -- 8
+* -- 30
+:= -- 129
+add.period$ -- 9
+call.type$ -- 3
+change.case$ -- 11
+chr.to.int$ -- 0
+cite$ -- 4
+duplicate$ -- 34
+empty$ -- 62
+format.name$ -- 8
+if$ -- 140
+int.to.chr$ -- 0
+int.to.str$ -- 3
+missing$ -- 5
+newline$ -- 18
+num.names$ -- 6
+pop$ -- 23
+preamble$ -- 1
+purify$ -- 10
+quote$ -- 0
+skip$ -- 20
+stack$ -- 0
+substring$ -- 15
+swap$ -- 2
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 8
+warning$ -- 1
+while$ -- 6
+width$ -- 4
+write$ -- 31
+(There was 1 warning)

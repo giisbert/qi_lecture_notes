@@ -1,0 +1,150 @@
+In this section, we prove a matrix generalization of the well-known classical Chernov bound, which reads as follows.
+
+%\begin{theorem}[Scalar Chernov bound] 
+% sdfsd
+%\end{theorem}
+
+
+
+
+\begin{theorem}[Lieb's Theorem] \label{thm:lieb}
+  Let $H \in \bbmH_d$. The matrix trace function
+  \begin{align}
+    A \mapsto \tr \exp(H+\log A)
+  \end{align}
+  is concave on $\bbmH_d^{++}$
+\end{theorem}
+
+\begin{definition}[Matrix relative entropy] \label{def:matrix_rel_entropy}
+  Let $A, B \in \bbmH_d^{++}$. The matrix relative entropy of $(A,B)$ is defined by
+  \begin{align}
+    D(A||B) \ := \ \tr \left(A(\log A - \log B) - (A-B) \right).
+  \end{align}
+\end{definition}
+
+Note that the matrix relative entropy defined above is nothing else, than the extension of the quantum relative entropy defined in Def. \ref{def:q_rel_ent} to the set of all
+nonnegative matrices (which are invertible). In fact, let $A, B \in \bbmH_d^{++}$, be nonnegative matrices with
+\begin{align}
+  A  \ = \ \alpha \cdot \rho \hspace{.5cm} \text{and} \hspace{.5cm} B  \ = \ \beta \cdot \sigma
+\end{align}
+and $\rho, \sigma \in \cS(\bbmC^d)$ full-rank density matrices, then
+\begin{align}
+  D(A||B) \  & = \ D(\alpha \rho|| \alpha \sigma)                                                                                                   \\
+             & = \ \tr(\alpha \rho(\log \alpha \rho) - \log(\beta \sigma)) - \tr(\alpha \rho - \beta \sigma)                                        \\
+             & = \ \tr(\alpha \rho(\log \alpha \bbmeins) + \log \rho) - \log(\beta \bbmeins)) - \log(\sigma)) - (\alpha - \beta)                    \\
+             & = \ \alpha D(\rho|| \sigma) + \alpha \log \frac{\alpha}{\beta} - (\alpha - \beta).  \label{relation_matrix_quantum_relative_entropy}
+\end{align}
+In consequence, some important properties of the quantum relative entropy an be concluded to the matrix relative entropy. An example of this fact is the monotonicity under
+completely positive and trace preserving maps, which will be the starting point for the rest of the chapter, and was already shown for density matrix arguments in Theorem
+\ref{cptp_monot_q_rel_entr}. A restatement for the present case reads as follows.
+
+\begin{corollary}[CPTP Monotonicity of the Matrix relative entropy]
+  Let $A, B \in \bbmH_n^++$, $\cN; \cL(\bbmC^n) \rightarrow \cL(\bbmC^m)$ be a c.p.t.p. map. It holds
+  \begin{align}
+    D(\cN(A)|| \cN(B)) \leq D(A||B)
+  \end{align}
+\end{corollary}
+\begin{proof}
+  We have
+  \begin{align}
+    D(A||B) - D(\cN(A)||\cN(B)) = \alpha (D(\rho||\sigma) - D(\cN(\rho)||\cN(\sigma))) \geq 0.
+  \end{align}
+  The equality above is by Eq. (\ref{relation_matrix_quantum_relative_entropy}). The inequality follows by positivity of $\alpha$ and Theorem \ref{cptp_monot_q_rel_entr}.
+\end{proof}
+
+\begin{theorem}[Joint Convexity of the matrix relative entropy] \label{matrix_relative_entropy_joint_convexity}
+  Let $A_1, A_2, B_1, B_2 \in \bbmH_d^{++}$, and $\lambda \in (0,1)$. It holds
+  \begin{align}
+    D(\lambda A_1 + (1-\lambda) A_2|| \lambda B_1 + (1-\lambda) B_2) \leq \lambda D(A_1||B_1) + (1-\lambda) D(A_2|| B_2)
+  \end{align}
+\end{theorem}
+
+\begin{proof}
+  Define nonnegative matrices
+  \begin{align}
+    A := \lambda A_1 \ket{e_1}\bra{e_1} + (1-\lambda) A_2 \otimes \ket{e_2}\bra{e_2} \hspace{.5cm} \text{and} \\
+    B := \lambda B_1 \ket{e_1}\bra{e_1} + (1-\lambda) B_2 \ket{e_2}\bra{e_2}.
+  \end{align}
+  We have
+  \begin{align}
+    D(A||B) = \lambda D(A_1||B_1) + (1 - \lambda) D(A_2||B_2),
+  \end{align}
+  on the other hand, tracing out the additional systems gives
+  \begin{align}
+    \tr_{\bbmC^2} A = \lambda A_1 + (1-\lambda) A_2, \ \text{and} \tr_{\bbmC^2} B = \lambda B_1 + (1-\lambda) B_2.
+  \end{align}
+  In combination, we have
+  \begin{align}
+    \lambda D(A_1||B_1) + (1-\lambda) D(A_2||B_2) \
+     & = \ D(A||B)                                                              \\
+     & \geq D(\tr_{\bbmC^2}A|| \tr_{\bbmC^2} B)                                 \\
+     & = D(\lambda A_1 + (1 - \lambda) A_2 || \lambda B_1 + (1 - \lambda) B_2).
+  \end{align}
+  The inequality above is by c.p.t.p. monotonicity of the matrix relative entropy.
+\end{proof}
+
+\begin{lemma} \label{lemma:joint_concavity_implies_partial_concavity}
+  Let $f: \bbmH_d^{++} \times \bbmH_d^{++} \rightarrow \bbmR$ be jointly concave. The function $\tilde{f}: \bbmH_d^{++} \rightarrow \bbmR$, given by
+  \begin{align}
+    \tilde{f}(B) = \underset{A \in \bbmH_d^{++}}{\sup} f(A,B) &  & (B \in \bbmH_d^{++})
+  \end{align}
+  is concave.
+\end{lemma}
+\begin{proof}
+  Fix $\epsilon > 0$. For each $B_1,B_2 \in \bbmH_d^{++}$ exist $A_1, A_2 \in \bbmH_d^{++}$ such that
+  \begin{align}
+    f(A_1,B_1) & \geq \underset{A \in \bbmH_d^{++}}{\sup} f(A,B_1) - \epsilon = \tilde{f}(B_1) - \epsilon, \ \text{and} \\
+    f(A_2,B_2) & \geq \underset{A \in \bbmH_d^{++}}{\sup} f(A,B_2) - \epsilon = \tilde{f}(B_2) - \epsilon
+  \end{align}
+  For each $\lambda \in (0,1)$, we have
+  \begin{align}
+    \tilde{f}(\lambda B_1 + (1- \lambda) B_2) \
+     & = \ \underset{A \in \bbmH_d^{++}}{\sup} f(A, \lambda B_1 + (1 - \lambda) B_2)          \\
+     & \geq \ f(\lambda A_1 + (1-\lambda) A_2, \lambda B_1 + (1 - \lambda) B_2)               \\
+     & \geq \lambda f(A_1,B_1) + (1 - \lambda) f(A_2,B_2)                                     \\
+     & \geq \lambda (\tilde{f}(A_1) - \epsilon) + (1 - \lambda) (\tilde{f}(B_2) -  \epsilon).
+  \end{align}
+  Since $\epsilon$ was an arbitrary positive number, we are done.
+\end{proof}
+\begin{lemma}\label{lemma:trace_variational}
+  Let $\bbmM \in \bbmH_d^{++}$. It holds
+  \begin{align}
+    \tr M = \underset{T \in \bbmH_d^{++}}{\sup} \tr(T \log M - T \log T +T)
+  \end{align}
+\end{lemma}
+\begin{proof}
+  By rearrangement of the inequality $D(M||T) \geq 0$, we know, that the l.h.s. of the equality to prove exceeds the r.h.s. On the other hand, equality is attained
+  when $T = M$.
+\end{proof}
+\begin{proof}[Proof of Theorem \ref{thm:lieb}]
+  We use Lemma \ref{lemma:trace_variational} with $M := \exp(H + \log A)$ to obtain
+  \begin{align}
+    \tr \exp (H + \log A) \
+     & = \ \underset{T \in \bbmH_d^{++}}{\sup} \tr\left(T( H+ \log A) - T \log T + T \right) \\
+     & = \ \underset{T \in \bbmH_d^{++}}{\sup} \tr\left(TH) + \tr(A) - D(T||A) \right).      \\
+  \end{align}
+  Since the matrix relative entropy is jointly convex, the function
+  \begin{align}
+    f(T,A) := \tr(TH) + \tr A - D(T||A)
+  \end{align}
+  is jointly concave. Using Lemma \ref{lemma:joint_concavity_implies_partial_concavity}, and the variational formula above, we are done.
+\end{proof}
+
+Next, we aim to prove a chernov-type bound for sums of independent hermitian random matrices. For each hermitian matrix $A \in \bbmH_d$, we use the shorcuts
+$\lambda_{\max}(A)$ and $\lambda_{\min}(A)$ to denote the maximal and minimal eigenvalues. It holds
+\begin{proposition}
+  Let $Y: \Omega \rightarrow \bbmH_d$ be a hermitian random matrix. For all $t \in \bbmR$, it holds
+  \begin{align}
+    \prob(\lambda_{\max}(Y) \geq t) \  & \leq \ \underset{\theta > 0}{\inf} \ e^{-\theta t} \cdot  \bbmE \tr e^{\theta Y}, \ \hspace{.5cm} \text{and} \\
+    \prob(\lambda_{\min}(Y) \leq t) \  & \leq \ \underset{\theta < 0}{\inf} \ e^{-\theta t} \cdot  \bbmE \tr e^{\theta Y}.
+  \end{align}
+\end{proposition}
+
+\begin{theorem}
+  Let $\{X_k\}_{k=1}^N$ be an independent family of hermitian random matrices, $X_k: \Omega \rightarrow \bbmH_d$ ($k \in [N]$). Set $Y := \sum_{k=1}^N X_k$.
+  It holds for all $t \in \bbmR$
+
+
+\end{theorem}
+
+

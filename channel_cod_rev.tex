@@ -1,0 +1,393 @@
+In this chapter, we will go somewhat deeper into the issue of ....
+
+ 
+     \subsection{Conditionally frequency typical subspaces}
+      In this section, we consider an extension of the notion of frequency typical sets from classical information theory to the setting of cq channels. Let $V: \cX \rightarrow \infty$ be a cq channel. We 
+      abbreviate $d:= \dim \cH$. To cope with the corresponding notation, we assume that $\cY := \{1,\dots, d\}$. Let 
+      \begin{align}
+       V(x) = \sum_{y \in \cY} \ \tilde{V}(y|x) \ket{\phi_y(x)} \bra{\phi_y(x)}
+      \end{align}
+       be a spectral decomposition of $V(x)$ for each $x \in \cX$. To notate the eigenvalue of $V(x)$ belonging to $\phi_y(x)$ by $\tilde{V}(y|x)$ may seem somewhat suggestive, but we have indeed 
+       \begin{align}
+         \forall y \in \cY:  \ 0 \ \leq \tilde{V}(y|x) \ \leq 1  \hspace{.3cm} \text{and} \hspace{.3cm} \sum_{y \in \cY} \ \tilde{V}(y|x) = 1
+       \end{align} 
+      for each $x \in \cX$, i.e. the numbers $\{\tilde{V}(y|x) \}_{x \in \cX, y \in \cY}$ are the entries of a stocastic $\cX \times \cY$ matrix $\tilde{V}$. For each $k \in \bbmN$, and $x^k \in \cX^k$, 
+      \begin{align}
+       V^{\otimes k}(x^k) = \sum_{y^k \in \cY^k} \ \tilde{V}^k(y^k|x^k) \ket{\phi_y^k(x^k)} \bra{\phi_y^k(x^k)}
+      \end{align}
+       is a spectral decomposition of $V^{\otimes k}(x^k)$, where we used the notation
+       \begin{align}
+        \tilde{V}^{k}(y^k|x^k) \ = \ \prod_{i=1}^k \tilde{V}(y_i|x_i), \ \text{and} \hspace{.3cm} \phi_{y^k}(x^k) := \phi_{y_1}(x_1) \otimes \cdots \otimes \phi_{y_k}(x_k)
+       \end{align}
+       for each $x^k = (x_1,\dots,x_k)$, $y^k = (y_1, \dots, y_k)$. We define for each $\delta > 0$, $x^k \in \cX^k$ the \emph{$\delta$-conditional frequency typcial projector to $V$ given $x^k$ by}
+       \begin{align}
+        p_{V,\delta}(x^k) \ := \ \sum_{y^k \in T_{\tilde{V},\delta}(x^k)} \ket{\phi_{y^k}(x^k)} \bra{\phi_{y^k}(x^k)}.
+       \end{align}
+       The following theorem provides some bounds for the frequency typical projections.
+       \begin{theorem}\label{th:freq_typ_prj_bounds}
+        Let $V: \cX \rightarrow \cS(\cH)$ be a classical-quantum channel, $d := \dim \cH$, and $\delta < \frac{1}{d |\cX|}$, $k \in \bbmN$. It holds
+        \begin{enumerate}
+         \item [1.] $p_{V,\delta}(x^k)V^{\otimes k}(x^k) \ = \ V^{\otimes k}(x^k) p_{V,\delta}(x^k)$ for all $x^k \in \cX^k$
+         \item [2.] $\tr p_{V,\delta}(x^k)V^{\otimes k}(x^k) \ \geq 1 - 2^{-k(c \delta^2 - \alpha_1(k))}$
+        \end{enumerate}
+        For each $q \in \cP(\cX)$, $x^k \in T_{q,\delta}^k$, abbreviating $\overline{V}_q := \sum_{x \in \cX} q(x) V(x)$, it holds
+        \begin{enumerate}
+         \item [3.] $\tr p_{\overline{V}_q, 2 \delta |\cX|} V^{\otimes k}(x^k) \ \geq \ 1 - 2^{-k(c \delta^2 - \alpha_1(k))}$
+         \item [4.] $2^{k(S(V|q) + \alpha_2(k,\delta))} \ \geq \ \tr p_{V,\delta}(x^k) \ \geq \ 2^{k(S(V|q) + \alpha_2(k,\delta))}$
+         \item [5.] $2^{-k(S(V|q) - \alpha_3(\delta))} \ \geq \ p_{V,\delta}(x^k)V^{\otimes k}(x^k) p_{V,\delta}(x^k) \ \geq \ 2^{-k(S(V|q) + \alpha_3(\delta))}$
+        \end{enumerate}
+       \end{theorem}
+
+         
+     
+     \subsection{The strong converse to the coding theorem}
+     In this section, we aim to stregthen the statement from Theorem \ref{thm:cq_capacity_theorem}.\ref{thm:dmqc_channel_coding_2}. We prove the \emph{strong converse} to the coding theorem \ref{thm:cq_capacity_theorem}.\ref{thm:dmqc_channel_coding_1}, which is the statement
+     \begin{align}
+      \forall \lambda < 1: \ \underset{n \rightarrow \infty}{\limsup} \frac{1}{n} \log N(n, W, \lambda) \ \leq \ \underset{p \in \cP(\cX)}{\sup} \chi(p,W).
+     \end{align}
+     \begin{subsubsection}{Gentle measurement}
+     \begin{lemma}
+      Let $\psi, \phi \in \cH$ be unit vectors in $\cH$. Then 
+      \begin{align}
+       \|\ket{\psi}\bra{\psi} - \ket{\phi}\bra{\phi}\|_1 \ = \ 2 \sqrt{1 - |\braket{\psi,\phi}|^2}.
+      \end{align}
+     \end{lemma}
+     \begin{proof}
+     We may write 
+     \begin{align}
+      \phi = \cos(\theta) \psi + e^{i\varphi} \sin(\theta) \psi^\perp
+     \end{align}
+     with some $\theta, \varphi \in [0, 2\pi]$. Notice, that
+     \begin{align}
+      |\braket{\psi,\phi}|^2 = \cos^2 \theta
+     \end{align}
+     holds. Moreover,
+     \begin{align}
+      \ket{\phi} \bra{\phi} \ = \ \cos^2 \phi \ket{\psi}\bra{\psi} + \cos \phi \sin \theta e^{i \varphi} \ket{\psi}\bra{\psi^\perp} + e^{i \varphi} \sin \theta \cos \theta \ket{\psi^\perp}\bra{\psi} 
+      + \sin^2 \theta \ket{\psi^\perp}\bra{\psi^\perp}.
+     \end{align}
+      We now writing $A = \ket{\psi}\bra{\psi} - \ket{\phi} \bra{\phi}$ in matrix form (according to $\psi, \psi^\perp$), we have
+      \begin{align*}
+       A \ = \ \left(\begin{array}{cc} 1 - \cos^2\theta & - e^{-i\varphi} \sin\theta\cos\theta \\
+        - e^{i \varphi} \sin \theta \cos \theta & - \sin^2 \theta \end{array}\right)
+         \ = \ \left(\begin{array}{cc} \sin^2\theta & - e^{-i\varphi} \sin\theta\cos\theta \\
+        - e^{i \varphi} \sin \theta \cos \theta & - \sin^2 \theta \end{array}\right).
+      \end{align*}
+     The reader may readily verify, that the eigenvalues of $A$ are $a_1 = |\sin \theta|$ and $a_2 := -|\sin \theta|$. We obtain
+     \begin{align}
+      \|\ket{\psi}\bra{\psi} - \ket{\phi}\bra{\phi}\|_1 \ = \ |a_1| + |a_2|  \ = \ 2 \cdot \sqrt{\sin^2 \theta}  \ =\  2 \cdot \sqrt{1 - \cos^2 \theta} \ = 2 \cdot \sqrt{1 - |\braket{\psi,\phi}|^2}.
+     \end{align}
+     \end{proof}
+     
+     \begin{lemma}
+      Let $a,b \in \cL(\cH)$, $a, b \geq 0$. Then
+      \begin{align}
+       \|a - b \|_1 \ \geq \ \|a^{\tfrac{1}{2}} - b^{\tfrac{1}{2}}\|_2^2.
+      \end{align}
+     \end{lemma}
+     \begin{proof}
+      Let 
+      \begin{align}
+        a^{\tfrac{1}{2}} - b^{\tfrac{1}{2}} = \sum_{i=1}^d \mu_i \ket{v_i}\bra{v_i}
+      \end{align}
+      be a spectral decomposition of the hermitian matrix $a^{\tfrac{1}{2}} - b^{\tfrac{1}{2}}$. It holds
+      \begin{align}
+       \|a^{\tfrac{1}{2}} - b^{\tfrac{1}{2}}\|_2^2  \ \tr(a^{\tfrac{1}{2}} - b^{\tfrac{1}{2}})^\ast(a^{\tfrac{1}{2}} - b^{\tfrac{1}{2}}) = \sum_{i=1}^d |\mu_i|^2.
+      \end{align}
+      Define a unitary matrix $u \in \cL(\cH)$ by 
+      \begin{align}
+       u \ = \ \sum_{i=1}^d \sign(\mu_i) \ket{v_i} \bra{v_i},
+      \end{align}
+      where 
+      \begin{align}
+       \sign(x) := \begin{cases} 1  & \text{if} \ x \geq 0 \\ -1& \text{if} \ x < 0 \end{cases}.
+      \end{align}
+      We have
+      \begin{align}
+       u(a^{\tfrac{1}{2}} - b^{\tfrac{1}{2}}) = (a^{\tfrac{1}{2}} - b^{\tfrac{1}{2}})u = \sum_{i=1}^d |\mu_i| \ket{v_i}\bra{v_i} = |a^{\tfrac{1}{2}} - b^{\tfrac{1}{2}}|.
+      \end{align}
+      Since for all $y, z \in \cL(\cH)$, the identity
+      \begin{align}
+       x^2 - y^2 = \frac{1}{2}\left((x+y)(x-y)+(x-y)(x+y) \right)
+      \end{align}
+      is valid, we have
+      \begin{align}
+       \|a - b\|_1 
+       \ & = \ \max\left\{|\tr (a-b)w|: \ w \in \cL(\cH), w^\ast w = \bbmeins_\cH \right\} \\
+       \ &  \ \geq |\tr (a-b)u| \\
+       \ & = \ |\tr ((a^{\tfrac{1}{2}})^2-(b^{\tfrac{1}{2}})^2)u| \\
+       \ & = \ \left|\frac{1}{2} \tr(a^{\tfrac{1}{2}} + b^{\tfrac{1}{2}})(a^{\tfrac{1}{2}} - b^{\tfrac{1}{2}}) + \frac{1}{2} \tr(a^{\tfrac{1}{2}} - b^{\tfrac{1}{2}})(a^{\tfrac{1}{2}} + b^{\tfrac{1}{2}})\right| \\
+       \ & = \ \left|\tr(a^{\tfrac{1}{2}} + b^{\tfrac{1}{2}})u(a^{\tfrac{1}{2}} - b^{\tfrac{1}{2}}) \right| \\
+       \ & = \ \tr(a^{\tfrac{1}{2}} + b^{\tfrac{1}{2}})|a^{\tfrac{1}{2}} - b^{\tfrac{1}{2}}|  \\
+       \ & = \ \sum_{i=1}^d |\mu_i| \tr (a^{\tfrac{1}{2}} + b^{\tfrac{1}{2}})\ket{v_i}\bra{v_i} \\
+       \ & = \ \sum_{i=1}^d |\mu_i|(\braket{v_i, a^{\tfrac{1}{2}} v_i}  + \braket{v_i, b^{\tfrac{1}{2}} v_i}) \\
+       \ & \geq \ \sum_{i=1}^d |\mu_i| \cdot |\braket{v_i, a^{\tfrac{1}{2}} v_i}  - \braket{v_i, b^{\tfrac{1}{2}} v_i}| \\
+       \ & \geq \ \sum_{i=1}^d |\mu_i|^2 \\
+       \ & = \ \| a^{\tfrac{1}{2}} - b^{\tfrac{1}{2}} \|_2^2.
+      \end{align}
+      \end{proof}
+      \begin{proposition}
+       Let $\rho, \sigma \in \cS(\cH)$ be density matrices. It holds
+       \begin{align}
+        1 - \sqrt{F(\rho,\sigma)} \ \leq \frac{1}{2} \|\rho - \sigma\|_1 \ \leq \ \sqrt{1 - F(\rho,\sigma)}.
+       \end{align}
+      \end{proposition}
+      \begin{proof}
+       We first proof the leftmost inequality. It holds
+       \begin{align}
+        \|\rho -\sigma\|_1 
+        \ & \geq \ \|\rho^{\tfrac{1}{2}} - \sigma^{\tfrac{1}{2}}\|_1 \\
+        \ & = \ \tr(\rho^{\tfrac{1}{2}} - \sigma^{\tfrac{1}{2}}) \\
+        \ & = \ \tr \rho - 2 \tr \rho^{\tfrac{1}{2}}\sigma^{\tfrac{1}{2}} + \tr \sigma \\ 
+        \ & = \ 2 \cdot (1 - \tr \rho^{\tfrac{1}{2}}\sigma^{\tfrac{1}{2}}) \\
+        \ & \geq  \ 2 \cdot (1 - \| \rho^{\tfrac{1}{2}}\sigma^{\tfrac{1}{2}}\|_1) \\ 
+        \ & = \  2 \cdot \left(1 - \sqrt{F(\rho, \sigma)}\right).
+       \end{align}
+       For the remaining inequality, let $\psi, \phi$ be state vectors of purifications of $\rho, \sigma$ which fulfill 
+       \begin{align}
+        F(\rho,\sigma) = |\braket{\phi,\psi}|^2.
+       \end{align}
+       Notice, that such vectors always exist due to Uhlmann's Theorem. We then have
+       \begin{align}
+        \| \rho - \sigma\|_1 \ \leq \ \|\ket{\phi}\bra{\phi} - \ket{\psi}\bra{\psi}\|_1 = 2 \sqrt{1- |\braket{\phi, \psi}|^2} = 2 \sqrt{1 - F(\rho,\sigma)}.
+       \end{align}
+       \end{proof}
+      \begin{theorem} \label{theorem:gentle_measurement}
+        Let $\rho \in \cS(\cH)$, $E \in \cL(\cH)$, $0 \leq E \leq \bbmeins_\cH$. It holds
+        \begin{align}
+         \|\rho - E^{\tfrac{1}{2}}\rho E^{\tfrac{1}{2}}\|_1 \leq 3 \sqrt{1 - \tr E\rho}.
+        \end{align}
+        \end{theorem}
+        \begin{proof}
+         Let $\psi \in \cH \otimes \cH$ be a state vector of a purification of $\rho$. Then 
+         \begin{align}
+           \psi' := \frac{(E^{\tfrac{1}{2}} \otimes \bbmeins_\cH)\ket{\psi}\bra{\psi}(E^{\tfrac{1}{2}} \otimes \bbmeins_\cH)^\ast}{\sqrt{\braket{\psi, 
+           (E^{\tfrac{1}{2}} \otimes \bbmeins_\cH) \psi}}}
+         \end{align}
+	is state vector to a purification of 
+	\begin{align}
+	 \rho' := \frac{E^{\tfrac{1}{2}}\rho E^{\tfrac{1}{2}}}{\tr E \rho}.
+	\end{align}
+        Consequently, we have
+        \begin{align}
+         F(\ket{\psi}\bra{\psi}, \ket{\psi'}\bra{\psi'}) 
+         \ & = \ |\braket{\psi,\psi'}|^2 \\
+         \ & = \ \frac{|\braket{\psi,(E^{\tfrac{1}{2}} \otimes \bbmeins_\cH)\psi}|^2}{\braket{\psi,(E^{\tfrac{1}{2}} \otimes \bbmeins_\cH)\psi}} \\
+         \ & = \tr \ket{\psi}\bra{\psi}(E^{\tfrac{1}{2}} \otimes \bbmeins_\cH) \\
+         \ & = \tr E^{\tfrac{1}{2}}\rho  \\
+         \ & \geq \tr E \rho.
+        \end{align}
+	It follows
+	\begin{align}
+	 F(\rho,\rho') \ \geq \ F(\ket{\psi}\bra{\psi}, \ket{\psi'}\bra{\psi'}) \ \geq \ \tr E \rho
+	\end{align}
+        which implies
+        \begin{align}
+         \|\rho - \rho'\|_1 \ \leq 2 \sqrt{1 - F(\rho,\rho')} \ \leq \ 2 \sqrt{1 - \tr E \rho}.
+        \end{align}
+        Finally, we can bound
+        \begin{align}
+         \|\rho - E^{\frac{1}{2}}\rho E^{\frac{1}{2}}\|_1 
+         \ &\leq \ \|\rho - \rho' + \rho' -E^{\frac{1}{2}}\rho E^{\frac{1}{2}}\|_1 \\
+         \ &\leq \ \|\rho - \rho'\|_1 + \|\rho' -E^{\frac{1}{2}}\rho E^{\frac{1}{2}}\|_1 \\
+         \ & \leq \ 2 \sqrt{1 - \tr E \rho} + |1 - \tr E \rho | \cdot \|E^{\frac{1}{2}}\rho E^{\frac{1}{2}}  \|_1 \\
+         \ & \leq \ 3 \sqrt{1 - \tr E \rho}.
+        \end{align}
+        \end{proof}
+
+	\begin{definition}[Shadow]
+	Let $\rho \in \cS(\cH)$ be a density matrix, $B \in \cL(\cH)$, $0 \leq B \leq \bbmeins_\cH$, and $\eta \in \bbmR \cap [0,1]$. We call $B$ an \emph{$\eta$-shadow} for
+	$\rho$, if 
+	\begin{align}
+	 \tr B \rho \geq \eta.
+	\end{align}
+	\end{definition}
+	\begin{lemma}[Shadow Lemma] \label{lemma:shadow_lemma}
+	 Let $E \in \cL(\cH)$, $0 \leq E \leq \bbmeins_\cH$, $\rho \in \cS(\cH)$ such that $\rho E = E \rho$. Assume that
+	 \begin{align}
+	  \tr E \rho \geq 1 - \lambda \hspace{.3cm} \text{and} \hspace{.3cm} \mu_1 E \leq  E^{\tfrac{1}{2}} \rho E^{\tfrac{1}{2}} \leq \mu_2 E  \label{lemma:shadow_lemma_1}
+	 \end{align}
+	does hold for some positive real numbers $\lambda, \mu_1, \mu_2$. Then
+	\begin{align}
+	 \frac{1- \lambda}{\mu_2} \ \leq \ \tr E \leq \frac{1}{\mu_1}, \label{lemma:shadow_lemma_2}
+	\end{align}
+        and, for each $0 \leq B \leq \bbmeins_\cH$ which is an $\eta$-shadow for $\rho$, it holds
+        \begin{align}
+         \tr B \ \geq \ \frac{\eta - \lambda}{\mu_2}. \label{lemma:shadow_lemma_3}
+        \end{align}
+	\end{lemma}
+        \begin{proof}
+        Taking traces on both sides of the right hand set of inequalities in (\ref{lemma:shadow_lemma_1}) implies
+        \begin{align}
+         \mu_1 \tr E \ \leq \ \tr E \rho \ \leq \ \mu_2 \tr E,
+        \end{align}
+	which implies, in turn, using the inequalities $1 - \lambda \leq \tr E \rho \leq 1$, the inequalities in (\ref{lemma:shadow_lemma_2}). To prove (\ref{lemma:shadow_lemma_3}), we 
+	bound
+	\begin{align}
+	 \mu_2 \tr B \ \geq \ \mu_2 \tr BE \ 
+	 & \geq \  \tr B E^{\tfrac{1}{2}} \rho E^{\tfrac{1}{2}} \\
+	 & = \tr B \rho - \tr (\rho - E^{\tfrac{1}{2}}\rho E^{\tfrac{1}{2}}) B \\
+	 & \geq  \tr B \rho - \tr(\rho - E^{\tfrac{1}{2}}\rho E^{\tfrac{1}{2}}) \\
+	 & \geq \eta - (1 - 1 - \lambda)  \\
+	 & = (\eta - \lambda).
+	\end{align}
+	\end{proof}
+	Having provided ourselves with the necessary prerequisites, we proceed to prove the strong converse to the coding theorem. We first show, that (subnormalized) codes with all codewords of the same type 
+	and small error have suitable upper bounds for their message set sizes. 
+	
+	\begin{proposition}\label{strong_converse_pre_proposition}
+	 Let $W: \cX \rightarrow \cS(\cH)$ be a classical-quantum channel, $n \in \bbmN$, $q \in \cP(\cX)$ a type of sequences in $\cX^n$. Let $\cC_q := (u_m,D_m)_{m=1}^{M_q}$ be a family with 
+	 \begin{enumerate}
+	  \item $u_m \in T_q^n$ for all $m \in [M_q]$
+	  \item $0 \leq D_m \leq \bbmeins_\cH^{\otimes n}$ for all $m \in [M_q]$, and $\sum_{m=1}^{M_q} D_m \leq \bbmeins_{\cH}^{\otimes n}$
+	  \item $e_m := \tr D_m^c W^{\otimes n} \leq \lambda$ for all $m \in [M_q]$.
+	 \end{enumerate}
+	 Then for each $\xi > 0$ there is a number $n_0(\xi,\lambda,W)$ such that for all $n > n_0$ the lower bound
+	 \begin{align}
+	  M_q \ \leq \ \frac{4}{1 - \lambda}  \exp\left(n(\chi(q,W) + \xi  \right)
+	 \end{align}
+        is true. 
+	\end{proposition}
+	\begin{remark}
+	 Notice, that the number $n_0$ in the above statement is independent of the chosen type $q$. This will be of some importance when using Proposition \ref{strong_converse_pre_proposition} to prove a strong converse to Holevo's Theorem 
+	\end{remark}
+
+	\begin{proof}
+	 Set $d := \dim \cH$, and let $\xi > 0$ be fixed. Fix a blocklength $n \in \bbmN$, and a number $\delta > 0$ large enough to simultaneaously fulfill the following three inequalities
+	 \begin{align}
+	  \exp\left(-n(c \delta^2/2 + \alpha_1(n)/2 - \log3 /n) \right) \  
+	  & \leq \ \frac{1-\lambda}{2}, \\ 
+	  \alpha_3(\delta) &\leq \xi/2, \\
+	  \varphi(2 |\cX| \delta) + \nu(k) &\leq \xi/2d.
+	 \end{align}
+         We define 
+         \begin{align}
+          \overline{W}_q := \sum_{x \in \cX} q(x) W(x) \hspace{.4cm} \text{and} \hspace{.4cm} \hat{q} := p_{n,2|\cX|\delta}(\overline{W}_q),
+         \end{align}
+         where $p_{n,2|\cX|\delta}(\overline{W}_q)$ is the $2|\cX|\delta$-frequency typical projection in $\cH^{\otimes n}$ belonging to the average output state $\overline{W}_q$. Moreover, we set
+         \begin{align}
+          W_m := W^{\otimes n}(u_m)
+         \end{align}
+         for each $m \in [M_q]$. We collect some bounds for the above defined Objects, we need later in the proof. By hypothesis, each $u_m$, $m \in [M_q]$ is of type $q$, we have 
+         \begin{enumerate}
+          \item[(i)] $\tr \hat{q} W_m \ = \ \tr\left(p_{n,2|\cX|\delta}(\overline{W}_q)W^{\otimes n}(u_m)\right) \ \geq \ 1 - 2^{-n(c \delta^2 - \alpha_1(n))}$
+          \item[(ii)] $3 \sqrt{1 - \tr \hat{q}W_m} \ \leq \  2^{n(c\delta^2/2 - \alpha_1(n)/2 - \log3/2)}\ \leq \frac{1-\lambda}{2}$
+         \end{enumerate}
+         where the last inequality above is a consequence of the choice made for $n$, and $\delta$. Define, for each $m \in [M_q]$ the effect 
+         \begin{align}
+          D'_m := \hat{q}^{\tfrac{1}{2}} D_m \hat{q}^{\tfrac{1}{2}}
+         \end{align}
+	 (remembering that $\hat{q}$ is a projection. It then holds 
+	 \begin{align}
+	  \tr D'_m W_m \ 
+	  & = \ \tr D_m \hat{q} W_m \hat{q}  \\
+	  & = \tr(D_m W_m) - \tr\left(D_m(W_m - \hat{q} W_m \hat{q}\right). \label{strong_converse_pre_proposition_1}
+	 \end{align}
+         The first term on the right hand side of (\ref{strong_converse_pre_proposition_1}) is bounded by
+         \begin{align}
+          \tr(D_m W_m) = 1 - \tr(D_m^c W_m) = 1 - e_m \geq 1 -\lambda \label{strong_converse_pre_proposition_1_1}
+         \end{align}
+	 by hypothesis. For the second term, we have
+	 \begin{align}
+	  \tr\left(D_m(W_m - \hat{q} W_m \hat{q})\right) 
+	  & \leq \tr (W_m - \hat{q} W_m \hat{q}) \\
+	  & = \|W_m - \hat{q} W_m \hat{q}\|_1 \\ 
+	  &\leq 3 \sqrt{1 - \tr \hat{q} W_m} \\
+	  &\leq \frac{1-\lambda}{2}. \label{strong_converse_pre_proposition_1_2}
+	 \end{align}
+	 The first inequality and the equality above both are by the fact, that $W_m \geq  \hat{q} W_m \hat{q}$ holds. The second inequality is by Lemma \ref{theorem:gentle_measurement}.
+	 The last inequality is by our choice of $n$ and $\delta$. Combining the estimates in (\ref{strong_converse_pre_proposition_1_2}) and (\ref{strong_converse_pre_proposition_1_1}) 
+	 with the bound in (\ref{strong_converse_pre_proposition_1}), we obtain
+	 \begin{align}
+	  \tr D'_m W_m \ \geq \frac{1-\lambda}{2}.
+	 \end{align}
+         Notice, that with $E := p_{W,\delta}(u_m)$, $B := D'_m$ and $\rho := W_m$, the conditions of Lemma \ref{lemma:shadow_lemma} are fulfilled, i.e. by Theorem \ref{th:freq_typ_prj_bounds}, we 
+         have
+         \begin{align}
+          \mu_1 E \ \leq \ E^{\tfrac{1}{2}} \rho E^{\tfrac{1}{2}} \leq \mu_2 E 
+         \end{align}
+         if we set 
+         \begin{align}
+          \mu_1 = 2^{-n(S(W|q) + \alpha_3(\delta))} \hspace{.4cm} \text{and} \hspace{.4cm} \mu_2 = 2^{-n(S(W|q) - \alpha_3(\delta))}.
+         \end{align}
+	 and
+	 \begin{align}
+	  \tr \rho E = \tr W_m D'_m = \tr W^{\otimes n}(u_m)p_{W,\delta}(u_m) \geq 1 - 2^{-n(c\delta^2 - \alpha_1(n))}.
+	 \end{align}
+         Consequently, we have
+         \begin{align}
+          \tr D'_m \
+          \ \geq \left(\frac{1-\lambda}{2} - 2^{-n(c\delta^2 -\alpha_1(n))} \right)\cdot \mu_2^{-1} \ 
+          \ \geq \frac{1-\lambda }{4} \cdot \mu_2^{-1}.
+         \end{align}
+	  On the other hand, 
+	  \begin{align}
+	   \sum_{m=1}^{M_q} \tr D'_m 
+	   & = \ \tr\left(\hat{q} \sum_{m=1}^{M_q} D_m \right) \\
+	   & \leq \tr \hat{q} \\
+	   & = \tr p_{n, 2|\cX|\delta}(\overline{W}_q) \\
+	   & \leq 2^{n(S(\overline{W}_q)+ d(\varphi(2 |\cX| \delta) + \nu(n))}.
+	  \end{align}
+	  Consequently,
+	  \begin{align}
+	   M_q \cdot \frac{1-\lambda}{4} \cdot 2^{n(S(W|q) - \frac{\xi}{2})} \leq \sum_{m=1}^{M_q} \tr D'_m \leq 2^{n(S(\overline{W}_q) + \frac{\xi}{2}}
+	  \end{align}
+	  rearrangements in the inequality between the leftmost and rightmost terms above yields 
+	  \begin{align}
+	   M_q \leq \frac{1 - \lambda}{4} \exp\left(n(S(\overline{W}_q) - S(W|q) + \xi \right)
+	  \end{align}
+	  which is the claimed upper bound for $M_q$ since $\chi(q,W) = S(\overline{W}_q) - S(W|q)$ by definition of the Holevo quantity. 
+	\end{proof}
+	We prove the strong converse
+	\begin{theorem}
+	 Let $W: \cX \rightarrow \cS(\cH)$ be a classical-quantum channel. It holds for all $\lambda \in (0,1)$ 
+	 \begin{align}
+	  \underset{n \rightarrow \infty}{\limsup} \frac{1}{n} \log N(n,W,\lambda) \leq \underset{p \in \cP(\cX)}{\sup} \chi(p,W).
+	 \end{align}
+	\end{theorem}
+	\begin{proof}
+	 Fix $\lambda, \xi \in (0,1)$, and let $n > n_0$ (where $n_0$ is the number in the statement of Proposition \ref{strong_converse_pre_proposition}.) Let $\cC := (u_m, D_m)_{m=1}^M$ 
+	 be any $(n,M)$-code for message transmission over $W$ with maximal error bounded by 
+	 \begin{align}
+	  e(\cC, W^{\otimes n}) \leq \lambda.
+	 \end{align}
+         Let $\cT$ be the set of types in $\cX^n$, such that at least one codeword in $\cC$ is of that type, i.e. 
+         \begin{align}
+          \cT \ := \ \left\{q \in \cT(n,\cX): \ T_q^n \cap \{u_m\}_{m=1}^M \neq \emptyset \right\}.
+         \end{align}
+	 Set 
+	 \begin{align}
+	  \cM_q := \{m: \ u_m \in T_q^n \}
+	 \end{align}
+	 It holds obviously $\cM_q \cap \cM_{q'} = \emptyset$ if $q$ and $q'$ are not equal. Moreover, $M = \sum_{q \in \cT} |\cM_q|$.
+	 Note, that for each $q \in \cT$, the family $(u_m,D_m)_{m \in \cM_q}$ fulfills the requirements of Proposition \ref{strong_converse_pre_proposition}. Consequently 
+	 \begin{align}
+	  |\cM_q| \ \leq \ \frac{1 -\lambda}{4} \cdot 2^{n(\chi(q,W) +\xi)} \ \leq \ \frac{1 -\lambda}{4} \cdot 2^{n(\sup_{p \in \cP(\cX)}\chi(p,W) +\xi)}
+	 \end{align}
+	 Summing up the bound over all $q \in \cT$, we have
+	 \begin{align}
+	  M 
+	  & = \sum_{q \in \cT} |\cM_q| \\
+	  & \leq |\cT| \cdot \frac{1 -\lambda}{4} \cdot 2^{n(\sup_{p \in \cP(\cX)}\chi(p,W) +\xi)}\\
+	  & \leq (n+1)^{|\cX|} \cdot \frac{1 -\lambda}{4} \cdot 2^{n(\sup_{p \in \cP(\cX)}\chi(p,W) +\xi)}.
+	 \end{align}
+	  Since the code $\cC$ was an arbitrary code with maximal error not exceeding $\lambda$, we have 
+	 \begin{align}
+	  N(n,W,\lambda) \ \leq \ \frac{1 -\lambda}{4} \cdot 2^{n(\sup_{p \in \cP(\cX)}\chi(p,W) +\xi)},
+	 \end{align}
+	  and, 
+	  \begin{align}
+	  \underset{n \rightarrow \infty}{\limsup} \frac{1}{n} \log N(n,W,\lambda) \leq \underset{p \in \cP(\cX)}{\sup} \chi(p,W).
+	 \end{align}
+	  which we set out to prove. 
+	 \end{proof}
+     \end{subsubsection}
+
+    
+     
+      
+     
+     
+     \subsection{Alternative proofs for the coding theorem}
+     
+     

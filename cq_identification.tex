@@ -1,0 +1,22 @@
+In this lecture, we consider identification of classical messages over discrete memoryless classical-quantum channels. The task of message
+\emph{identification} is to distinguish from that of classical message transmission, which we considered in lecture .. The receiver does not 
+need an answer to the question 
+\begin{align*}
+ \text{What was the message?} 
+\end{align*}
+
+
+
+
+
+\begin{definition} \label{def:id_code}
+An $(n,N,\lambda_1,\lambda_2)$ \emph{ID code} for the DMCQC $W: \cX \rightarrow \cS(\cH)$ is a family $(Q(\cdot|i), D_i)_{i=1}^N$ such that 
+$Q(\cdot|i) \in \cP(\cX^n)$ is a probability distribution on $\cX^n$ and $D_i \in \cL(\cH^{\otimes n})$, $0 \leq D_i \leq \bbmeins$ for all 
+$i \in [N]$ such that 
+\end{definition}
+
+\begin{definition} \label{def:sim_id_code}
+An $(n,N,\lambda_1,\lambda_2)$ \emph{ID code} for the DMCQC $W: \cX \rightarrow \cS(\cH)$ is a family $(Q(\cdot|i), D_i)_{i=1}^N$ such that 
+$Q(\cdot|i) \in \cP(\cX^n)$ is a probability distribution on $\cX^n$, $D_i \in \cL(\cH^{\otimes n})$, $0 \leq D_i \leq \bbmeins$ for all 
+$i \in [N]$, and $\sum_{i=1}^N D_i$ forms a POVM.
+\end{definition}

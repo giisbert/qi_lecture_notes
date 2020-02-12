@@ -1,0 +1,127 @@
+In this chapter, we consider \emph{teleportation} and \emph{dense coding} two prominent protocols being prominent in quantum information theory. 
+
+
+\begin{subsection}{Local operations and classical communication}
+ We introduce notions which go beyond the concept of quantum channels. 
+ 
+ \begin{definition}[Operation]
+  Let $\cH, \cK$ be Hilbert spaces. A completely positive map $\cT: \ \cL(\cH) \rightarrow \cL(\cK)$ which in addition is trace-nonincreasing, i.e. 
+  \begin{align}
+   \tr \cT(A) \leq \tr A &&(A \in \cL(\cH), A \geq 0)
+  \end{align}
+  is called \emph{(quantum) operation}. We define the shortcut
+  \begin{align}
+   \cC^{\downarrow}(\cH, \cK) := \left\{\cT: \cL(\cH) \rightarrow \cL(\cK): \ \cT \ \text{is c.p., and} \ \forall A \geq 0: \ \tr \cT(A) \leq \tr A  \right\}.
+  \end{align}
+ \end{definition}
+ \begin{remark} 
+  \begin{enumerate}
+   \item [(i)] By definition, a quantum channel (completely positive and trace preserving map) is an operation, i.e. $\cC(\cH,\cK) \subset \ \cC^{\downarrow}(\cH,\cK)$.
+   \item [(ii)] Because an operation is c.p. in particular, it admits a Kraus representation.
+   \item [(iii)] An operation can be always completed to be a quantum channel by adding a suitable c.p. map.
+  \end{enumerate}
+ \end{remark}
+ 
+ \begin{definition}[Instrument]
+ Let $|\cX| < \infty$. A \emph{(quantum) instrument} is a family $\{\cT_x\}_{x \in \cX}$ such that 
+ \begin{enumerate}
+  \item $\cT_x \in \cC^{\downarrow}(\cH,\cK)$ for each $x \in \cX$, and
+  \item $\sum_{x \in \cX} \cT_x \in \cC(\cH,\cK)$.
+ \end{enumerate}
+ \end{definition}
+ 
+ \begin{definition}[One-way LOCC channels]
+ Let $\cH_A, \cH_B, \cK_A, \cH_B$ be Hilbert spaces of systems under control of communication parties $A$ and $B$. A quantum channel $\cN \in \cC(\cH_A \otimes \cH_B, \cK_A \otimes \cK_B)$ is a LOCC channel with local operations regarding $A$ and $B$ and (noiseless) classical communication from $A$ to $B$ ($A\rightarrow B$-one-way LOCC channel), if it can be written in the form
+ \begin{align}
+  \cN(a) := \sum_{k=1}^N \cA_k \otimes \cB_k (a) 
+ \end{align}
+ where $\{\cA_k: k \in [N]\}\subset \cC{\downarrow}(\cH_A, \cK_A)$ is a quantum instrument, and $\cB_k \in \cC(\cH_B,\cK_B)$ is a quantum channel for each $k \in [N]$. 
+ \end{definition} 
+\end{subsection}
+\begin{subsection}{Entanglement-enhanced LOCC - Quantum Teleportation}
+It is known, that one cannot exceed the class of separable states by LOCC mappings. A very interesting class of protocols arises, if two parties can use preshared entangled states in addition to local operations and classical communiation. One prominent example of this class is the so-called \emph{quantum teleportation} protocol. 
+\begin{theorem}[Quantum teleportation]\label{thm:teleportation} \index{quantum!teleportation}
+Let $\cH_A \simeq \cK_A \simeq \cK_B$ be Hilbert spaces. There exists an $A \rightarrow B$ one-way LOCC channel $\cT \in \cC(\cH_A \otimes \cK_A \otimes \cK_B, \cK_B)$ such that with a pure maximally entangled state
+$\Phi \in \cS(\cK_A \otimes \cK_B)$
+\begin{align}
+\cT(a \otimes \Phi) \ = \ a \label{thm:teleportation_1}
+\end{align}
+for each $a \in \cL(\cH_A)$. 	
+\end{theorem}
+Before we prove the above assertion, we supply us with the following lemma.
+\begin{lemma}\label{lemma:unitary_basis}
+Let $d \in \bbmN$. There exists a family $\{v_i\}_{i=1}^{d^2} \subset \cL(\bbmC^d)$ of unitary matrices, such that the following properties hold. 
+\begin{enumerate}
+	\item $\tr v_i^\ast v_k \ = \ d \delta_{ij}$ for all $i,j \in [d^2]$
+	\item With $\phi := \sqrt{d}^{-1} \sum_{k=1}^d e_k \otimes e_k$ and $\phi_i := (v_i\otimes \bbmeins)\phi$ for each $i \in [d]$, it holds  \label{lemma:unitary_basis_2}
+	\begin{enumerate}
+		\item[\ref{lemma:unitary_basis_2}a.] $\braket{\phi_i, \phi_j}  \ = \ \delta_{ij}$ for all $i,j \in [d]$
+		\item[\ref{lemma:unitary_basis_2}b.] $\sum_{i=1}^{d^2} \ket{\phi_i}\bra{\phi_i} \ = \ \bbmeins \otimes \bbmeins$.
+	\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Let $\gamma: \{0,d-1\} \times \{0,d-1\} \rightarrow [d^1]$ be any bijection. We will show, that the matrices
+\begin{align}
+v_i := v_{\gamma(r,s)} := \sum_{l=0}^{d-1} e^{-i2\pi s l /d} \ket{e_{l \ominus r}}\bra{e_l} &&(i \in [d^2]) 
+\end{align}
+suffice the properties claimed in the lemma ($\ominus$ denotes the modulo-$d$ substraction). Unitarity of $v_1,\dots, v_{d^2}$ follows by straightforward calculation. To show the first claim of the lemma, 
+let $(r,s) = \gamma{-1}(j)$, $(r',s') = \gamma^{-1}(k)$. It holds
+\begin{align}
+\tr v_k^\ast v_j \ 
+= \ \sum_{l,l'=0}^{d-1} e^{i2\pi'(s'l' - sl)/d} \delta_{r'r}\cdot \delta_{l'l} \
+= \ \sum_{l=0}^{d-1} e^{i2\pi(s'-s)l/d}  \delta_{rr'} \label{lemma:unitary_basis_4}
+\end{align}
+We assume $r = r'$ and evaluate the right hand side of (\ref{lemma:unitary_basis_4}). If $s=s'$, one can directly see, that $j=k$, and 
+\begin{align}
+\tr_{v_k^\ast v_j} = d.
+\end{align}
+When $s \neq s'$, then 
+\begin{align}
+\sum_{l=0}^{d-1} e^{i2\pi(s'-s)l/d} \ = \ \sum_{l=0}^{d-1} (e^{i2\pi(s'-s)/d})^l = 0
+\end{align}
+To verify the rightmost of the above inequalites, we notice, that evaluating the geometric sum $\sum_l=0^{d-1} q^l$ with $q = e^{i2\pi(s'-s)/d}$ leads us to 
+\begin{align}
+\sum_{l=0}^{d-1} (e^{i2\pi(s'-s)/d})^l = \frac{1 - e^{i2\pi(s-s')}}{1- e^{(s-s')/d}} = 0.
+\end{align}
+We summarize
+\begin{itemize}
+\item $k \neq j \ \Rightarrow \ r \neq r' \vee s \neq s' \ \Rightarrow \tr v_k^\ast v_j = 0$
+\item $k = j \ \Rightarrow \ r = r' \wedge s=s' \ \Rightarrow \tr v_k^\ast v_j = d$
+\end{itemize}
+which shows the first claim. The remaining statements are rather straightforward applications of the first statement and are left as exercises. 
+\end{proof}
+\begin{proof}[Proof of Theorem \ref{thm:teleportation}]
+Let $\dim \cH_A = d$, and $\Phi := \ket{\phi}\bra{\phi}$ with $\phi := \sqrt{d}^{-1} \sum_{k=1}^d e_k \otimes e_k$. Using the family $\{v_i\}_{i=1}^{d^2}$ and the family $\{\phi_i\}_{i=1}^{d^2}$ from lemma \ref{lemma:unitary_basis} respectively, we set $\Phi_k := \ket{\phi_k}\bra{\phi_k}$,
+\begin{align} 
+ \cE_k(\cdot) \ &:= P_k (\cdot) P_k^\ast \ \in \cC^{\downarrow}(\cH_A \otimes \cK_A, \cH_A \otimes \cK_A)\hspace{.5cm} \text{and} \\
+ \cU_k(\cdot) \ &:= v_k(\cdot)v_k^\ast \ \in \cC(\cK_B, \cK_B) 
+\end{align}
+for each $k \in [d^2]$. It is easy to check, usign the claims of Lemma \ref{lemma:unitary_basis}, that 
+$\{\cE_k: \ k \in [d^2]\}$ is a quantum instrument, and consequently
+\begin{align}
+\tilde{\cT}(\cdot) \ := \ \sum_{k=1}^{d^2} \cE_k \otimes \cU_k(\cdot) \label{thm:teleportation_2}
+\end{align}
+is an $A\rightarrow B$ one-way LOCC channel. Moreover, the channel $\cT := \tr_{\cH_A \otimes \cK_A} \circ \tilde{\cT}$ is also an $A\rightarrow B$ one-way LOCC channel (Check this!). We show, that $\cT$ 
+suffices the identity in (\ref{thm:teleportation_1}). Since the map $a \mapsto \cT(a \otimes \Phi)$ is linear, it is enough to show the identity for all matrix units $E_{ij} := \ket{e_i}\bra{e_j}$, $i,j \in [d]$. With the notation introduced, notice, that 
+\begin{align}
+\Phi &= \frac{1}{d} \sum_{i,j=1}^d E_{ij} \otimes E_{ij}, \ \text{and} \\
+\Phi_k& = \frac{1}{d} \sum_{i,j=1}^d E_{ij} \otimes v_kE_{ij}v_k^\ast &&(k \in [d^2])
+\end{align}
+holds. We individually evaluate the summands in the right hand side of Eq. (\ref{thm:teleportation_2}). It holds for each $k \in [d^2], m,n \in [d]$
+\begin{align}
+ \cE_k \otimes \cU_k (E_{mn} \otimes \Phi)  \
+ &= \ (\Phi_k \otimes v_k^\ast)(E_{mn} \otimes \Phi) (\Phi_k \otimes v_k^\ast)^\ast \\
+ &= \ \frac{1}{d} \sum_{i,j=1}^d (\Phi_k \otimes v_k^\ast) (E_{mn} \otimes E_{ij} \otimes E_{ij})(\Phi_k \otimes v_k^\ast)^\ast \\
+ &= \ \Phi_k \otimes \left(\frac{1}{d} \sum_{i,j=1}^d \braket{\phi_k, e_m \otimes e_i}\braket{e_n \otimes e_k, \phi_k} \cdot v_k^\ast E_{ij} v_k\right)
+\end{align}
+A calculation shows, that the termin in brackets above equals $\frac{1}{d} E_{mn}$. Summing up the equalities, we have
+\begin{align}
+\cT(\Phi, E_{mn}) \ 
+ & = \ \tr_{\cH_A \otimes \cK_A}\left(\sum_{k=1}^{d^2} \cE_k \otimes \cU_k (\Phi \otimes E_{mn}) \right) \\
+ & = \ \tr_{\cH_A \otimes \cK_A}\left(\sum_{k=1}^{d^2} \Phi_k \otimes E_{mn}\right) \\
+ & = \ E_{mn}.
+\end{align}
+\end{proof}
+\end{subsection}

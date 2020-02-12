@@ -1,0 +1,83 @@
+\indexentry{mixed state}{7}
+\indexentry{observable}{8}
+\indexentry{measurement}{8}
+\indexentry{projection valued measure}{9}
+\indexentry{measurement!von Neumann}{9}
+\indexentry{qubit}{9}
+\indexentry{Pauli matrices}{9}
+\indexentry{linear space!direct sum}{11}
+\indexentry{linear space!tensor product}{11}
+\indexentry{matrix!block}{12}
+\indexentry{partial trace}{14}
+\indexentry{trace!partial}{14}
+\indexentry{quantum state!product}{15}
+\indexentry{quantum state!separable}{15}
+\indexentry{quantum state!entangled}{15}
+\indexentry{decomposition!Schmidt -}{16}
+\indexentry{Schmidt number}{16}
+\indexentry{Schmidt coefficients}{16}
+\indexentry{purification}{17}
+\indexentry{entanglement!witness}{17}
+\indexentry{Lemma!Quantum Stein's}{22}
+\indexentry{entropy!von Neumann}{22}
+\indexentry{matrix!stochastic}{29}
+\indexentry{stochastic matrix}{29}
+\indexentry{map!completely positive}{29}
+\indexentry{completely positive map}{29}
+\indexentry{map!positive}{29}
+\indexentry{positive map}{29}
+\indexentry{partial transposition}{29}
+\indexentry{channel!quantum}{29}
+\indexentry{quantum channel}{29}
+\indexentry{map!completely positive and trace preserving}{29}
+\indexentry{map!c.p.t.p.}{29}
+\indexentry{quantum!copying device}{30}
+\indexentry{Kraus!decomposition}{30}
+\indexentry{decomposition!Kraus}{30}
+\indexentry{Hilbert-Schmidt adjoint}{34}
+\indexentry{fidelity}{35}
+\indexentry{theorem! Uhlmann's theorem}{36}
+\indexentry{fidelity!entanglement fidelity}{39}
+\indexentry{entropy!von Neumann!concavity}{43}
+\indexentry{Peierl's inequality}{44}
+\indexentry{entropy!von Neumann!subadditivity}{47}
+\indexentry{No cloning theorem}{48}
+\indexentry{channel!classical-quantum}{49}
+\indexentry{DMCQC}{49}
+\indexentry{Holevo quantity}{51}
+\indexentry{Holevo information}{51}
+\indexentry{Holevo information}{51}
+\indexentry{adjoint!of a c.p. map}{52}
+\indexentry{mutual information!classical}{52}
+\indexentry{accessible information}{53}
+\indexentry{Fano's lemma}{56}
+\indexentry{multi-letter formula}{64}
+\indexentry{quantum!teleportation}{92}
+\indexentry{dense coding}{96}
+\indexentry{dense coding}{96}
+\indexentry{classical message transmission!entanglement-assisted}{97}
+\indexentry{quantum mutual information}{98}
+\indexentry{mutual information!quantum}{98}
+\indexentry{Hilbert space}{111}
+\indexentry{Dirac notation}{112}
+\indexentry{``ket''}{112}
+\indexentry{``bra''}{112}
+\indexentry{product!outer}{112}
+\indexentry{matrix!unit}{112}
+\indexentry{map!positive semidefinite}{113}
+\indexentry{projector}{113}
+\indexentry{eigenvalue}{113}
+\indexentry{commutator}{113}
+\indexentry{decomposition!spectral}{113}
+\indexentry{decomposition!polar}{114}
+\indexentry{trace norm}{114}
+\indexentry{Hilbert-Schmidt norm}{114}
+\indexentry{set!convex}{115}
+\indexentry{convex!set}{115}
+\indexentry{convex combination}{115}
+\indexentry{convex!function}{115}
+\indexentry{function!convex}{115}
+\indexentry{concave!function}{116}
+\indexentry{function!concave}{116}
+\indexentry{function!affine}{116}
+\indexentry{matrix monotone function}{117}

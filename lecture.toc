@@ -1,0 +1,51 @@
+\contentsline {chapter}{Contents}{1}% 
+\contentsline {chapter}{\chapternumberline {1}Statistical theories in a nutshell}{5}% 
+\contentsline {section}{\numberline {1.1}Statistical theories - A general framework}{5}% 
+\contentsline {section}{\numberline {1.2}Example: Qubit systems}{9}% 
+\contentsline {chapter}{\chapternumberline {2}Composite quantum systems}{11}% 
+\contentsline {subsection}{Mathematical Interlude -- Direct sums and tensor products}{11}% 
+\contentsline {subsection}{Direct sum spaces}{12}% 
+\contentsline {subsection}{Tensor product spaces}{13}% 
+\contentsline {subsection}{Isomorphisms and representations}{13}% 
+\contentsline {subsection}{Schmidt decomposition}{16}% 
+\contentsline {section}{\numberline {2.1}Supplement: Entanglement witnesses}{17}% 
+\contentsline {section}{\numberline {2.2}Exercises}{20}% 
+\contentsline {chapter}{\chapternumberline {3}Quantum hypotheses testing - Quantum Stein's Lemma}{21}% 
+\contentsline {section}{\numberline {3.1}Quantum Stein's Lemma}{22}% 
+\contentsline {subsection}{Types}{22}% 
+\contentsline {subsection}{Proof - Achievability}{25}% 
+\contentsline {subsection}{Proof - Converse}{27}% 
+\contentsline {section}{\numberline {3.2}Exercises}{28}% 
+\contentsline {chapter}{\chapternumberline {4}Quantum Channels}{29}% 
+\contentsline {section}{\numberline {4.1}Exercises}{34}% 
+\contentsline {chapter}{\chapternumberline {5}Source compression for memoryless quantum sources}{35}% 
+\contentsline {section}{\numberline {5.1}Fidelity, and Entanglement Fidelity}{35}% 
+\contentsline {section}{\numberline {5.2}Quantum Source Compression}{40}% 
+\contentsline {section}{\numberline {5.3}Supplement: Matrix Functions and some properties of the von Neumann entropy}{43}% 
+\contentsline {section}{\numberline {5.4}Exercises}{48}% 
+\contentsline {chapter}{\chapternumberline {6}Message transmission over quantum channels}{49}% 
+\contentsline {section}{\numberline {6.1}The discrete memoryless classical-quantum channel}{49}% 
+\contentsline {subsection}{The weak converse to the coding theorem}{51}% 
+\contentsline {subsection}{The coding theorem}{58}% 
+\contentsline {section}{\numberline {6.2}The discrete memoryless quantum channel}{63}% 
+\contentsline {part}{\partnumberline {I}Some more Topics}{69}% 
+\contentsline {chapter}{\chapternumberline {7}Transmission of classical messages over quantum channels: revisited}{71}% 
+\contentsline {subsection}{Conditionally frequency typical subspaces}{71}% 
+\contentsline {subsection}{The strong converse to the coding theorem}{72}% 
+\contentsline {subsubsection}{Gentle measurement}{72}% 
+\contentsline {subsection}{Alternative proofs for the coding theorem}{79}% 
+\contentsline {chapter}{\chapternumberline {8}Message identification over classical-quantum channels}{81}% 
+\contentsline {chapter}{\chapternumberline {9}Message transmission over classical-classical-quantum multiple-access channels}{83}% 
+\contentsline {chapter}{\chapternumberline {10}A Chernov-Hoeffding type Concentration inequality for random matrices}{87}% 
+\contentsline {chapter}{\chapternumberline {11}Teleportation and Dense Coding}{91}% 
+\contentsline {subsection}{Local operations and classical communication}{91}% 
+\contentsline {subsection}{Entanglement-enhanced LOCC - Quantum Teleportation}{92}% 
+\contentsline {chapter}{\chapternumberline {12}Entanglement Assisted Classical Message Transmission}{95}% 
+\contentsline {part}{\partnumberline {II}Supplements}{109}% 
+\contentsline {section}{\numberline {12.1}Linear algebra}{111}% 
+\contentsline {section}{\numberline {12.2}Finite-valued random variables and random matrices}{114}% 
+\contentsline {section}{\numberline {12.3}Convex analysis}{115}% 
+\contentsline {section}{\numberline {12.4}Exercises}{116}% 
+\contentsline {chapter}{\chapternumberline {13}Matrix monotonicity}{117}% 
+\contentsline {chapter}{Index}{119}% 
+\contentsline {chapter}{Bibliography}{121}% 

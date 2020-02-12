@@ -1,0 +1,363 @@
+In this lecture we consider the "asymmetric quantum hypothesis testing" problem. Assume, an experimenter is confronted with a source which emits pairwise independent and equally prepared quantum systems. Given two a priori density matrices  
+$\sigma_0$ (called ``null hypothesis''), or $\sigma_1$ (called ``alternative hypothesis'') the goal is to decide by measurements on the outputs, which preparation is present. 
+We prove ``Quantum  Stein's lemma'', 
+which quantifies the behaviour of the error of optimal tests for this task in a situation, where large numbers of outputs of the systems are available for 
+performing tests. \\
+This lecture is central to the course for two reasons. A first one is, that hypothesis tests also make up for good  message transmission codes. This fact is already known
+from classical Shannon information theory. However, this relation seems to be even more important for quantum systems, as we will see in subsequent sections. A second reason
+is, that Stein's lemma allows a very simple and illuminating proof of the \emph{monotonicity of the quantum relative entropy under completely positive and trace preserving maps}, 
+which is notoriously hard to prove otherwise. After all, this will be our entrance to several highly notrivial quantum entropic inequalities which are essential for proving 
+major results in quantum Shannon theory. \\
+The mentioned strategy to prove entropy inequalities starting from Quantum Stein's lemma is strongly inspired by the paper \cite{bjelakovic12a}, where also the relatively elementary proof 
+of the result given below can be found. The interested reader also should consult that work. 
+To formally settle the above described situation, assume, we are confronted with a preparation device which emits quantum systems pairwise uncorellated and 
+additionally all being prepared according to the same density matrix. If this density matrix is $\gamma$, the mentioned properties of the preparation device ensure us, that 
+the statistical behaviour of the joint quantum state of $n$ systems (``\emph{blocklength} $n$'') prepared is described by the density matrix 
+\begin{align*}
+\gamma^{\otimes n} := \underbrace{\gamma \otimes \cdots \otimes \gamma}_{n \ \text{times}}
+\end{align*}
+To settle the (asymetric) Hypothesis test problem, assume now, that the state $\gamma$ is unknown to the receiver of the systems. The receiver is provided with two 
+a priori hypotheses in form of density matrices $\rho$ (``null hypothesis'') and $\sigma$ (``alternative hypothesis''), and tries by measurement on the outputs,
+to decide, which of these hypothesis to accept. For a given test $\{E_0,E_1\}$ on the $n$-fold output system, two kinds of errors can happen 
+\begin{enumerate}
+	\item \textbf{First kind error:} The actual density matrix is $\rho$, but $\sigma$ is detected. This happens with probability 
+	\begin{align*}
+	\tr E_1 \rho^{\otimes n} = \tr (\bbmeins - E_0) \rho^{\otimes n}
+	\end{align*}
+	\item \textbf{Second kind error:} The density matrix is $\sigma$, but $\rho$ is detected. This happens with probability 
+	\begin{align*}
+	\tr E_0 \sigma^{\otimes n}
+	\end{align*}
+\end{enumerate}
+\section{Quantum Stein's Lemma}
+A common goal now is, to determine the optimal asymptotical behaviour of the second kind error for tests whose first kind error is below a threshold $\epsilon \in (0,1)$. 
+For this reason, we define for each $\epsilon \in [0,1]$
+\begin{align*}
+ \beta_{\epsilon,n}(\rho, \sigma) := \inf\left\{\tr(a \sigma^{\otimes n}): 
+ \ 0 \leq a \leq \bbmeins_\cH^{\otimes n} \ \text{and} \ \tr(a \rho^{\otimes n}) \geq 1 - \epsilon \right\}.
+\end{align*}
+To formulate the quantum version of Stein's Lemma, we need the following definition
+\begin{definition}[Quantum relative entropy] \label{def:q_rel_ent}
+ The \emph{quantum relative entropy} of a pair $(\rho,\sigma) \in \cS(\cK) \times \cS(\cK)$ is defined
+ \begin{align*}
+  D(\rho||\sigma) := \ \begin{cases}
+                        \tr(\rho(\log \rho - \log \sigma)) & \text{if} \ \ker{\sigma} \subset \ker{\rho} \\
+                        + \infty & \text{otherwise}
+                       \end{cases}
+ \end{align*}
+\end{definition}
+The following Theorem is the quantum theoretic generalization to Stein's Lemma.
+\begin{theorem}[Quantum Stein's Lemma \index{Lemma!Quantum Stein's}] \label{thm:q_stein_lemma}
+Let $\rho, \sigma \in \cS(\cH)$ density matrices with $\ker \sigma \subset \ker \rho$. For each $\epsilon \in (0,1)$, it holds
+\begin{align*}
+ \underset{n \rightarrow \infty}{\lim} \frac{1}{n} \log \beta_{\epsilon,n}(\rho, \sigma) \ = \ -D(\rho||\sigma)
+\end{align*}
+\end{theorem}
+We will prove the above theorem in two portions. First, we prove the claim
+\begin{align}
+ \underset{n \rightarrow \infty}{\limsup} \frac{1}{n} \log \beta_{\epsilon,n}(\rho, \sigma) \ \leq \ -D(\rho||\sigma)  \label{thm:q_stein_lemma_achiev}
+\end{align}
+which implies, together with 
+\begin{align}
+ \underset{n \rightarrow \infty}{\liminf} \frac{1}{n} \log \beta_{\epsilon,n}(\rho, \sigma) \ \geq \ -D(\rho||\sigma) \label{thm:q_stein_lemma_converse}
+\end{align}
+the assertion of the theorem. 
+\begin{subsection}{Types}
+In this paragraph, we introduce a certain instance of "typical projections". 	
+To proceed, we need the following definition
+\begin{definition}[von Neumann entropy\index{entropy!von Neumann}] \label{def:von_neumann_entropy}
+ The \emph{von Neumann entropy} of a density matrix $\rho \in \cS(\cH)$ is defined by
+ \begin{align*}
+  S(\rho) := - \tr(\rho \log \rho).
+ \end{align*}
+\end{definition}
+\begin{remark}
+Note, that $\log A$ is not defined, if is not of full rank. The above definition is to be understood using the convention $0 \log 0 = 0$.
+\end{remark}
+First, we introduce some notions, we will use. Let $\tau_1, \ \tau_2$ be density matrices on $\cH$, such that $\ker \tau_2 \subset \ker \tau_1$. We set
+\begin{align*}
+ M(\tau_1\| \tau_2) := - \tr \tau_1 \log \tau_2,
+\end{align*}
+which allows us to write
+\begin{align*}
+ D(\tau_1||\tau_2) 
+ = \tr(\tau_1 \log \tau_1) - \tr(\tau_1 \log \tau_2)
+ = -S(\tau_1) + M(\tau_1\|\tau_2), 
+\end{align*}
+and
+\begin{align*}
+ M(\tau_1||\tau_1) = S(\tau_1)
+\end{align*}
+in case that $\tau_1 = \tau_2$ holds. Set $d := \dim \cH$ and
+\begin{align*}
+ \tau_2 = \sum_{x=1}^d \mu(x) \ket{\phi_x}\bra{\phi_x}
+\end{align*}
+a spectral decomposition of $\tau_2$. For each $n \in \bbmN$, we obtain
+\begin{align}
+ \tau_2^{\otimes n} 
+ & = \left(\sum_{x =1}^d \mu(x) \ket{\phi_x} \bra{\phi_x} \right)^{\otimes n} \nonumber 
+ \nonumber \\
+ & = \bigotimes_{i=1}^n \left(\sum_{x_1 =1}^d \mu(x_i) \ket{\phi_{x_i}} \bra{\phi_{x_i}}  \right) \nonumber  \nonumber \\ 
+ & = \sum_{x_1=1}^d \cdots \sum_{x_n = 1}^d \mu(x_1) \cdots \mu(x_n) \ket{\phi_{x_1}} \bra{\phi_{x_1}} \otimes \cdots \otimes \ket{\phi_{x_n}} \bra{\phi_{x_n}} \nonumber \\
+ & = \sum_{x^n \in [d]^n} \mu^n(x^n) \ket{\phi_{x^n}}\bra{\phi_{x^n}}.  \label{tens_prod_spect_dec}
+\end{align}
+The last equality is from introducing the notation
+\begin{align*}
+ \mu^n(x^n) : = \mu(x_1) \cdots \mu(x_n) = \prod_{i=1}^n \mu(x_i), \hspace{.3cm} \text{and} \hspace{.3cm} \phi_{x^n} := \phi_{x_1} \otimes \cdots \otimes \phi_{x_n}
+\end{align*}
+for each $x^n = (x_1, \dots, x_n) \in [d]^n$. In fact, $\{\phi_{x^n}: \ x^n \in [d]^n\}$ is an orthonormal basis in $\cH^{\otimes n}$. 
+The right hand side of Eq. (\ref{tens_prod_spect_dec}) is a spectral decomposition of $\tau_2^{\otimes n}$. We define for each $\delta > 0$, $n \in \bbmN$ the set
+\begin{align}
+ T_{\delta,n}(\tau_1, \tau_2) 
+ %:&= \left\{x^n \in [d]^n: \ M(\tau_1||\tau_2) - \delta < - \frac{1}{n} \log \mu^n(x^n) < M(\tau_1||\tau_2) + \delta \right\} \\
+  &:= \left\{x^n \in [d]^n: \ 2^{-n(M(\tau_1||\tau_2) + \delta)} <  \mu^n(x^n) <  2^{-(M(\tau_1||\tau_2) - \delta)} \right\} \label{def:rel_typical_set}
+ \end{align}
+According to the set $T_{\delta,n}(\tau_1,\tau_2)$, we define the projector
+\begin{align*}
+ p_{\delta, n}(\tau_1,\tau_2) := \sum_{x^n \in T_{\delta,n}(\tau_1,\tau_2)} \ket{\phi_{x^n}} \bra{\phi_{x^n}}
+\end{align*}
+The next lemma collects some useful properties of the above type of projector. 
+\begin{lemma}\label{lemma:steins_lemma_projection}
+ Let $\tau_1, \tau_2 \in \cS(\cH)$, $\ker \tau_2 \subset \ker{\tau_1}$. For each $\delta > 0$, it holds with the abbreviation $p_n := p_{\delta,n}(\tau_1,\tau_2)$ 
+ \begin{enumerate}
+  \item $p_n \tau_2^{\otimes n} \ = \ \tau_2^{\otimes n}$ for all $n \in \bbmN$, \label{lemma:steins_lemma_projection_1}
+  \item $p_n \tau_2^{\otimes n} p_n \ \leq \ 2^{-n(M(\tau_1||\tau_2)- \delta)} p_n$, \label{lemma:steins_lemma_projection_2}
+  \item $p_n \tau_2^{\otimes n} p_n \ \geq \ 2^{-n(M(\tau_1||\tau_2)+ \delta)} p_n$, \label{lemma:steins_lemma_projection_3}
+  \item $\lim_{n \rightarrow \infty} \tr p_n \tau_1^{\otimes n} \ = \ 1$. \label{lemma:steins_lemma_projection_4}
+ \end{enumerate}
+ \end{lemma}
+
+ \begin{proof}
+  The first three claims are obvious from the definitions. We will now show, that the fourth claim follows from an application of the law of large numbers. Define an 
+  i.i.d. sequence 
+  $
+   X_1,\dots,X_n
+  $
+  of random variables with values in $[d]$ and probabilities
+  \begin{align*}
+   \Pr\left(X_i = x\right) = \braket{\phi_x, \tau_1 \phi_x}
+  \end{align*}
+  for each $i \in [n]$. We consequently have
+  \begin{align*}
+   \Pr\left(X_1 = x_1 \wedge \cdots \wedge X_n = x_n \right)
+    \ &= \ \prod_{i=1}^n \Pr(X_i = x_i) \\
+    \ &= \ \prod_{i=1}^n \braket{\phi_{x_i}, \tau_1 \phi_{x_i}} \\
+    \ &= \ \braket{\phi_{x^n}, \tau_1^{\otimes n} \phi_{x^n}} 
+   \end{align*}
+   for each $x^n \in [d]^n$. Using the function $f: [d] \rightarrow \bbmR$ defined by 
+   \begin{align*}
+    f(x) := - \log \mu(x) &&(x \in [d]),
+   \end{align*}
+   we obtain another i.i.d. sequence $U_1,\dots,U_n$ of random variables, each defined by
+   \begin{align*}
+    U_i := f \circ X_i.   &&(i \in [n]).
+   \end{align*}
+   It holds
+   \begin{align*}
+    \bbmE U_i 
+    \ &= \ \sum_{x \in [d]} \Pr(X_i = x) f(x) \\
+    \ &= \ - \sum_{x \in [d]} \Pr(X_i = x) \log \mu (x) \\
+    \ &= \ - \sum_{x \in [d]} \Pr(X_i = x) \braket{\phi_x, \log \tau_2 \phi_x} \\
+    \ &= \ - \sum_{x \in [d]} \braket{\phi_x, \tau_1 \phi_x} \braket{\phi_x, \log \tau_2 \phi_x} \\
+    \ &= \ - \tr(\tau_1 \log \tau_2)  \\
+    \ &= \ M(\tau_1||\tau_2).
+   \end{align*}
+   Thus, it holds
+   \begin{align*}
+    \tr(\tau_1^{\otimes n} p_n) 
+    &= \sum_{x^n \in T_{\delta,n}(\tau_1,\tau_2)} \tr(\tau_1^{\otimes n} \ket{\phi_{x^n}}\bra{\phi_{x^n}} \\
+    &= \Pr\left((X_1,\dots,X_n) \in T_{\delta,n}(\tau_1,\tau_2)\right) \\
+    &= \Pr \left(\left|\frac{1}{n} \sum_{i=1}^n U_i - M(\tau_1||\tau_2) \right| < \delta \right) \\
+    &= \Pr \left(\left|\frac{1}{n} \sum_{i=1}^n U_i - n\bbmE(U_1) \right| < \delta \right)
+   \end{align*}
+   Taking the limit $n \rightarrow \infty$ in the chain of eqalities above, we obtain the fourth claim of the lemma by using the law of large numbers. 
+ \end{proof}
+  \end{subsection}
+  \begin{subsection}{Proof - Achievability}
+  To prove achievability in Quantum Stein's lemma, i.e. the inequality in Eq. (\ref{thm:q_stein_lemma_achiev}), we will define suitable tests which are essentially products of the projections $p_{n,\delta}(\rho, \sigma)$ 
+  and $p_{n,\delta}(\rho,\rho)$ for some fixed $\delta$. These projections do not necessarily commute, therefore, we will need the following lemma. 
+  \begin{lemma} \label{lemma:quantum_stein_matrix_ineq_1}
+  Let $p,q \in \cL(\cK)$, $0 \leq p,q \leq \bbmeins_\cK$. It holds
+  \begin{align*}
+   \tr(\tau pqp) \ \geq \ \tr(\tau q) - 2 \sqrt{\tr \tau (\bbmeins_\cK - p)} .
+  \end{align*}
+  \end{lemma}
+  \begin{proof}
+   We abbreviate $\bbmeins_\cK$ with $\bbmeins$. It holds 
+   \begin{align*}
+    0 \ \leq \ (\bbmeins -p) q (\bbmeins - p) \ = \ -q + q(\bbmeins -p) + (\bbmeins - p)q + pqp,
+   \end{align*}
+   which is equivalent to 
+   \begin{align*}
+    q \ \leq \ q(\bbmeins -p) + (\bbmeins - p) q + pqp
+   \end{align*}
+   which in turn, by multiplying with $\tau$ and using the conjugation rule Lemma \ref{lemma:conjugation_rule} can be transformed to 
+   \begin{align*}
+    \tau^{\tfrac{1}{2}} q \tau^{\tfrac{1}{2}} \ \leq \ \tau^{\tfrac{1}{2}} q(\bbmeins -p) \tau^{\tfrac{1}{2}} + \tau^{\tfrac{1}{2}} (\bbmeins - p)q \tau^{\tfrac{1}{2}} + \tau^{\tfrac{1}{2}} pqp \tau^{\tfrac{1}{2}}.
+   \end{align*}
+   Note that
+   \begin{align*}
+    \tr \tau^{\tfrac{1}{2}} q (\bbmeins - p) \tau^{\tfrac{1}{2}} + \tr \tau^{\tfrac{1}{2}} (\bbmeins - p)q \tau^{\tfrac{1}{2}} \ 
+     &= \ \tr \tau^{\tfrac{1}{2}} q (\bbmeins - p) \tau^{\tfrac{1}{2}} + \overline{\tr \tau^{\tfrac{1}{2}} (\bbmeins - p)q \tau^{\tfrac{1}{2}}} \\
+     &= 2 \cdot Re \tr \tau^{\tfrac{1}{2}} q (\bbmeins - p) \tau^{\tfrac{1}{2}} \\
+     &\leq 2 \cdot | \tr \tau^{\tfrac{1}{2}} q (\bbmeins - p) \tau^{\tfrac{1}{2}}| \\
+     &\leq 2 \sqrt{\tr \tau q^2} \cdot \sqrt{\tr \tau (1-p)^2 }.
+    \end{align*}
+   Using monotonicity of the trace, we arrive at
+   \begin{align*}
+    \tr \tau q  
+    & \leq \ \tr \tau pqp + \tr \tau^{\tfrac{1}{2}} q (\bbmeins - p) \tau^{\tfrac{1}{2}} + \tr \tau^{\tfrac{1}{2}} (\bbmeins - p)q \tau^{\tfrac{1}{2}} \\
+    & \leq \ \tr \tau pqp + 2 \sqrt{\tr \tau q^2} \cdot \sqrt{\tr \tau (1-p)^2 }.\\
+   \end{align*}
+   Consequently, we have
+   \begin{align*}
+    \tr \tau pqp \ \geq \ \tr \tau q - 2 \sqrt{\tr \tau (\bbmeins - p)}, 
+   \end{align*}
+  as we desired to prove.
+  \end{proof}
+  
+  \begin{proof}[Proof of achievability in Theorem \ref{thm:q_stein_lemma}, i.e. Eq. (\ref{thm:q_stein_lemma_achiev})]
+  We show, for $\rho, \sigma \in \cS(\cH)$, $\ker \sigma \subset \ker \rho$, $\epsilon > 0$ 
+  \begin{align*}
+   \underset{n \rightarrow \infty}{\limsup} \frac{1}{n} \log \beta_{\epsilon, n}(\rho, \sigma) \ \leq \ - D(\rho||\sigma) 
+  \end{align*}
+  holds Fix numbers $\delta > 0$, $n \in \bbmN$. We define according to Lemma \ref{lemma:steins_lemma_projection} 
+  %\begin{align*}
+  $p_{n} := p_{\delta,n}(\rho, \rho)$,
+  %\end{align*}
+  $q_n := p_{\delta,n}(\rho, \sigma)$ and an effect
+  %\begin{align*}
+   $a_n := q_np_nq_n(\rho, \sigma)$,
+  %\end{align*}
+  which will serve as the hypothesis test for blocklength $n$. It holds
+  \begin{align} 
+   \tr a_n \rho^{\otimes n} \ = \ \tr q_np_nq_n\rho^{\otimes n} 
+   \ \geq \ \tr p_n \rho^{\otimes n} - 2 \cdot \left(\tr (\bbmeins_{\cH}^{\otimes n} - q_n)\rho^{\otimes n}\right)^\frac{1}{2},  \label{quantum_stein_achiev_1}
+  \end{align}
+  where Lemma \ref{lemma:quantum_stein_matrix_ineq_1} was used. Each of the summands in Eq. (\ref{quantum_stein_achiev_1}) can be upper bounded by using properties of the projections stated in Lemma 
+  \ref{lemma:steins_lemma_projection} with $\tau_1 = \tau_2 = \rho$. We have by Lemma \ref{lemma:steins_lemma_projection}.\ref{lemma:steins_lemma_projection_4} applied with $\tau_1 = \tau_2 = \rho$	
+  \begin{align}
+   \underset{n \rightarrow \infty}{\lim} \tr p_n \rho^{\otimes n} = 1, \label{quantum_stein_achiev_1_a}
+  \end{align}
+  and with $\tau_1 = \rho$, $\tau_2 = \sigma$
+  \begin{align}
+    \underset{n \rightarrow \infty}{\lim} \tr p_n \rho^{\otimes n} = 1. \label{quantum_stein_achiev_1_b}
+  \end{align}
+  Combination of (\ref{quantum_stein_achiev_1_a}) and (\ref{quantum_stein_achiev_1_b}) with (\ref{quantum_stein_achiev_1}) leads us to
+  %\begin{align*}    
+      $\underset{n \rightarrow \infty}{\lim} \ \tr a_n \rho^{\otimes n}  \ = \  1$. 
+  %\end{align*}
+   For each large enough $n$, we therefore have
+   \begin{align}
+    \tr(a_n \rho^{\otimes n}) \geq 1 - \epsilon \label{quantum_stein_achiev_2},
+   \end{align}
+   i.e. $a_n$ belongs to the feasible set of optimization for $\beta_{\epsilon,n}(\rho, \sigma)$. We will show, that the second kind error of $a_n$ is bounded in a suitable way for large enough blocklengths. Note, that 
+   \begin{align}
+	    \tr p_n q_n p_n 
+	    \ \leq \ \tr p_n 
+	    \ \leq \ 2^{-n(S(\rho) - \delta)} \cdot \tr p_n \rho^{\otimes n}. 
+   \end{align}
+   Consequently, it holds
+   \begin{align*}
+    \tr a_n \sigma^{\otimes n} \ 
+    &= \ \tr q_n \sigma^{\otimes n} q_n p_n \\
+	&\leq 2^{-n(M(\rho||\sigma) - \delta)} \cdot \tr p_n q_n p_n \\
+	&\leq 2^{-n(D(\rho||\sigma)- 2\delta)}.
+   \end{align*}
+   Finally, we conclude, that for large enough $n$, 
+   \begin{align*}
+    \beta_{n, \epsilon}(\rho,\sigma)  \ \leq \ tr a_n \sigma^{\otimes n} \leq \exp(-n(D(\rho||\sigma) -2 \delta)),
+   \end{align*}
+   i.e. 
+   \begin{align*}
+    \underset{n \rightarrow \infty}{\limsup} \frac{1}{n} \log \beta_{\epsilon, n}(\rho, \sigma) \ \leq \ - D(\rho|| \sigma) + 2 \delta.
+   \end{align*}
+   Since $\delta$ was an arbitrary positive number, we are done. 
+  \end{proof}
+  \end{subsection}
+  \begin{subsection}{Proof - Converse}
+  For proving the converse statement (\ref{thm:q_stein_lemma_converse}), we will employ the following inequality, which can be derived from the one given in Lemma \ref{lemma:quantum_stein_matrix_ineq_1}.
+  \begin{lemma}\label{lemma:quantum_stein_matrix_ineq_2}
+   Let $p,q,u \in \cL(\cK)$, $0 \leq p,q \leq \bbmeins_\cK$, $\tau \in \cS(\cK)$, and $u$ a projection with $u\tau = \tau u$, and $\tau u \leq c u$ for some $c \in \bbmR_+$. Then 
+   \begin{align*}
+    \tr(pqp) \ \geq \ \frac{1}{c} \left( \tr \tau q  - 2 (\tr \tau(\bbmeins_\cK - p))^{\tfrac{1}{2}} - \tr \tau (\bbmeins_\cK - u)\right).
+   \end{align*}
+  \end{lemma}
+  \begin{proof}
+   It holds
+   \begin{align*}
+    \tr pqp \ 
+    &= \ \tr upqp + tr (\bbmeins - u) pqp  \\
+    &\geq \tr upqp \\ 
+    &\geq \frac{1}{c} \ \tr \tau upqp \\
+    & = \frac{1}{c} \left(\tr \tau pqp  - \tr \tau (\bbmeins -u) pqp \right) \\
+    & \geq \frac{1}{c} \left(\tr \tau pqp  - \tr \tau (\bbmeins -u) pqp \right).
+   \end{align*}
+    Applying Lemma \ref{lemma:quantum_stein_matrix_ineq_1} to lower-bound $\tr \tau pqp$, we obtain the desired inequality.
+  \end{proof}
+
+  \begin{proof}[Proof of the converse to Quantum Stein's lemma]
+  We fix $\epsilon \in (0,1)$ and show the inequality 
+  \begin{align*}
+   \underset{n \rightarrow}{\liminf} \frac{1}{n} \log \beta_{\epsilon, n}(\rho,\sigma) \ \geq \ -D(\rho||\sigma).
+  \end{align*}
+   Fix $\gamma > 1$. Let for $n \in \bbmN$, $a_n \in [0, \bbmeins_\cH^{\otimes n}]$ be any test, such that 
+   \begin{align*}
+    \tr q_n \rho^{\otimes n} \ & \geq  1 - \epsilon, \hspace{.2cm} \text{and}  \\
+    \tr q_n \sigma^{\otimes n} \ & \leq \ \gamma \cdot \beta_{\epsilon,n}
+   \end{align*}
+   are simultaneously fulfilled (note, that such a text always exists). It holds (with $p_n, q_n$ as defined in the achievability proof)
+   \begin{align*}
+    \sigma^{\otimes n} \ 
+    \geq \ q_n \sigma^{\otimes n} q_n
+    \geq \ \exp\left(-n (M(\rho||\sigma) + \delta) \right) q_{n},
+   \end{align*}
+   by Lemma \ref{lemma:steins_lemma_projection_3} applied with $\tau_1 = \rho$, and $\tau_2 = \sigma$. Consequently,
+   \begin{align}
+    a_n^{\frac{1}{2}} \sigma^{\otimes n} a_n^{\frac{1}{2}} \ \geq \ \exp\left(-n ( M(\rho||\sigma) + \delta \right) a_n^{\frac{1}{2}} q_n a_n^{\frac{1}{2}} \label{quantum_stein_converse_3}
+   \end{align}
+   does hold, where the first inequality is by the conjugation rule (Lemma \ref{lemma:conjugation_rule}). Taking traces on both sides of the inequality in (\ref{quantum_stein_converse_3}), we arrive at
+  \begin{align*}
+    \beta_{\epsilon, n}(\rho, \sigma) \ \geq \ \gamma^{-1} \tr a_n \sigma^{\otimes n} \ \geq \  \gamma^{-1} \cdot \exp\left(-n (M(\rho||\sigma) + \delta \right) \cdot \tr a_n q_n
+   \end{align*}
+  Using Lemma \ref{lemma:steins_lemma_projection} with $\tau_1 = \tau_2 = \rho$ leads us to 
+  \begin{align}
+   p_n \rho^{\otimes n} p_n \ \geq \ 2^{-n (S(\rho) - \delta)} p_n. \label{quantum_stein_converse_4}
+  \end{align}
+  With the inequality in (\ref{quantum_stein_converse_4}), the conditions of Lemma \ref{lemma:quantum_stein_matrix_ineq_2} are fulfilled  with the assignments $u = p = q_n$, $q = a_n$. $\tau = \rho$, 
+  and $c = \exp(-n(S(\rho) - \delta))$. It holds
+  \begin{align*}
+   \tr q_n a_n q_n \ &\geq \ \exp(n(S(\rho) - \delta))  \\
+			    & \cdot \left(\tr \rho^{\otimes n} a_n  - 2 \left(\tr \rho^{\otimes n}(\bbmeins_{\cH}^{\otimes n} - q_n))\right)^{\tfrac{1}{2}} - \tr \rho^{\otimes n} 
+   (\bbmeins_\cH^{\otimes n} - q_{n})\right).
+  \end{align*}
+  Note, that the first term in brackets on the r.h.s. of the above inequality approaches one, while the others go to zero. We conclude, that for large enough $n$, we have
+  \begin{align*}
+  \tr q_n a_n q_n  \ &\geq \ \frac{1- \epsilon}{2} \cdot \exp(n(S(\rho) - \delta)).
+  \end{align*}
+  Putting everything together and taking logarithms, we arrive at 
+  \begin{align*}
+   \frac{1}{n} \log \beta_{\epsilon, n}(\rho, \sigma) \ \geq    \frac{1}{n} \log\frac{1- \epsilon}{2\gamma} \cdot (-D(\rho||\sigma) - 2 \delta)
+  \end{align*}
+  Taking the limes inferior on both sides of the above inequality gives the desired result.
+  \end{proof} 
+  \end{subsection}
+  \section{Exercises}
+  
+  \begin{exercise}
+   Use the strategy of the above proof to Stein's Lemma to provide yourself with a proof of the classical version of Stein's lemma. Hint: In the classical case, the Lemmas \ref{lemma:quantum_stein_matrix_ineq_1} and 
+   Lemma \ref{lemma:quantum_stein_matrix_ineq_2} can be replaced by usage of the union
+    bound.
+  \end{exercise}
+  
+%  \begin{exercise}[Singular case of Quantum Stein's Lemma]
+%   sdfs
+%  \end{exercise}
+
+
+
+
+
+
+
+

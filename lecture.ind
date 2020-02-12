@@ -1,0 +1,151 @@
+\begin{theindex}
+
+  \item ``bra'', 112
+  \item ``ket'', 112
+
+  \indexspace
+
+  \item accessible information, 53
+  \item adjoint
+    \subitem of a c.p. map, 52
+
+  \indexspace
+
+  \item channel
+    \subitem classical-quantum, 49
+    \subitem quantum, 29
+  \item classical message transmission
+    \subitem entanglement-assisted, 97
+  \item commutator, 113
+  \item completely positive map, 29
+  \item concave
+    \subitem function, 116
+  \item convex
+    \subitem function, 115
+    \subitem set, 115
+  \item convex combination, 115
+
+  \indexspace
+
+  \item decomposition
+    \subitem Kraus, 30
+    \subitem polar, 114
+    \subitem Schmidt -, 16
+    \subitem spectral, 113
+  \item dense coding, 96
+  \item Dirac notation, 112
+  \item DMCQC, 49
+
+  \indexspace
+
+  \item eigenvalue, 113
+  \item entanglement
+    \subitem witness, 17
+  \item entropy
+    \subitem von Neumann, 22
+      \subsubitem concavity, 43
+      \subsubitem subadditivity, 47
+
+  \indexspace
+
+  \item Fano's lemma, 56
+  \item fidelity, 35
+    \subitem entanglement fidelity, 39
+  \item function
+    \subitem affine, 116
+    \subitem concave, 116
+    \subitem convex, 115
+
+  \indexspace
+
+  \item Hilbert space, 111
+  \item Hilbert-Schmidt adjoint, 34
+  \item Hilbert-Schmidt norm, 114
+  \item Holevo information, 51
+  \item Holevo quantity, 51
+
+  \indexspace
+
+  \item Kraus
+    \subitem decomposition, 30
+
+  \indexspace
+
+  \item Lemma
+    \subitem Quantum Stein's, 22
+  \item linear space
+    \subitem direct sum, 11
+    \subitem tensor product, 11
+
+  \indexspace
+
+  \item map
+    \subitem c.p.t.p., 29
+    \subitem completely positive, 29
+    \subitem completely positive and trace preserving, 29
+    \subitem positive, 29
+    \subitem positive semidefinite, 113
+  \item matrix
+    \subitem block, 12
+    \subitem stochastic, 29
+    \subitem unit, 112
+  \item matrix monotone function, 117
+  \item measurement, 8
+    \subitem von Neumann, 9
+  \item mixed state, 7
+  \item multi-letter formula, 64
+  \item mutual information
+    \subitem classical, 52
+    \subitem quantum, 98
+
+  \indexspace
+
+  \item No cloning theorem, 48
+
+  \indexspace
+
+  \item observable, 8
+
+  \indexspace
+
+  \item partial trace, 14
+  \item partial transposition, 29
+  \item Pauli matrices, 9
+  \item Peierl's inequality, 44
+  \item positive map, 29
+  \item product
+    \subitem outer, 112
+  \item projection valued measure, 9
+  \item projector, 113
+  \item purification, 17
+
+  \indexspace
+
+  \item quantum
+    \subitem copying device, 30
+    \subitem teleportation, 92
+  \item quantum channel, 29
+  \item quantum mutual information, 98
+  \item quantum state
+    \subitem entangled, 15
+    \subitem product, 15
+    \subitem separable, 15
+  \item qubit, 9
+
+  \indexspace
+
+  \item Schmidt coefficients, 16
+  \item Schmidt number, 16
+  \item set
+    \subitem convex, 115
+  \item stochastic matrix, 29
+
+  \indexspace
+
+  \item theorem
+    \subitem  Uhlmann's theorem, 36
+  \item trace
+    \subitem partial, 14
+  \item trace norm, 114
+
+\end{theindex}

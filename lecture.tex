@@ -1,0 +1,104 @@
+\documentclass[a4paper, 11pt]{memoir}
+\author{Gisbert Jan\ss en}
+\include{header_gisbert}
+\semiisopage
+\chapterstyle{komalike}
+\usepackage{makeidx}
+%\titlehead{Lecture Notes}
+\title{Lecture Notes: \\ Quantum Information Theory}
+\makeindex
+\begin{document}
+\maketitle
+\tableofcontents
+
+%\part{Basics}
+
+
+\chapter*{About these notes}
+\label{chap:about}
+\input{about}
+
+
+\chapter{Statistical theories in a nutshell}
+\label{chap:stat_th}
+ \input{stat_th}
+
+
+\chapter{Composite quantum systems}
+\label{chap:comp_sys}
+ \input{comp_sys}
+
+
+\chapter{Quantum hypotheses testing - Quantum Stein's Lemma}
+\label{chap:hypotheses_tests}
+ \input{hypotheses_tests}
+
+
+\chapter{Quantum Channels}
+\label{chap:quantum_channels}
+ \input{quantum_channels}
+
+
+\chapter{Source compression for memoryless quantum sources}
+\label{chap:source_comp}
+ \input{source_comp}
+
+
+\chapter{Message transmission over quantum channels}
+\label{chap:channel_cod}
+ \input{channel_cod}
+
+
+\part{Some more Topics}
+
+% \chapter{Types and frequency typical sets}
+% \label{app:types}
+%  \input{types}
+
+
+\chapter{Transmission of classical messages over quantum channels: revisited}
+\label{chap:channel_cod_rev}
+ \input{channel_cod_rev}
+
+\chapter{Message identification over classical-quantum channels}
+\label{chap:cq_identification}
+ \input{cq_identification}
+
+
+\chapter{Message transmission over classical-classical-quantum multiple-access channels}
+\input{cq_mac_coding}
+
+\chapter{A Chernov-Hoeffding type Concentration inequality for random matrices}
+\label{chap:hoeffding}
+ \input{hoeffding}
+
+% \chapter{Transmission of private messages over quantum channels}
+
+% \chapter{The genuine quantum capacities}
+
+\chapter{Teleportation and Dense Coding}
+\label{chap:telep_dense_cod}
+ \input{telep_dense_cod}
+
+% \chapter{Entanglement Cost}
+
+ \chapter{Entanglement Assisted Classical Message Transmission}
+\label{chap:ent_assist_cl_mess}
+ \input{ent_assist_cl_mess}
+
+\part{Supplements}
+\chapter*{Mathematical preliminaries and notation}
+\label{chap:preliminaries}
+\input{preliminaries}
+
+
+\chapter{Matrix monotonicity}
+\label{chap:matrix_monotonicity}
+ \input{matrix_mon}
+
+\printindex
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}

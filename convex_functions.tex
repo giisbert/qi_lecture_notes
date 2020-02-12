@@ -1,0 +1,42 @@
+In this appendix, we review some basic facts from (scalar) convex analysis. 
+
+
+\begin{definition}
+ Let $I \subset \bbmR$ be an interval. A function $f: I \rightarrow \bbmR$ is called 
+ \begin{enumerate}
+  \item \emph{convex}, if for each $x_1, x_2 \in I$, $\lambda \in [0,1]$, 
+  \begin{align}
+   f(\lambda x_1 + (1 - \lambda) x_2 ) \leq \lambda f(x_1) + (1-\lambda) f(x_2).
+  \end{align}
+  \item \emph{mid-point convex}, if for each $x_1, x_2 \in I$
+  \begin{align}
+   f\left(\frac{x_1 + x_2}{2}\right) \leq \frac{f(x_1)+ f(x_2)}{2}.
+  \end{align}
+  \item \emph{concave}, if $-f$ is convex.
+ \end{enumerate}
+\end{definition}
+
+In the following, $I$ designates a convex subset of $\bbmR$ (i.e. an interval)
+
+
+\begin{proposition}
+ Let $f: I \rightarrow \bbmR$ be a function. It holds
+ \begin{align}
+  f \ \text{mid-point convex and continuous} \ \Rightarrow \ f \ \text{convex}.
+ \end{align}
+\end{proposition}
+
+
+
+
+
+\begin{theorem}[Jensen's inequality]
+ Let $I \subset \bbmR$ be an interval, and $f: I \rightarrow \bbmR$ a convex function. For each $x_1, \dots, x_N \subset I$, $\lambda_1,\dots, \lambda_N \in [0,1])$ such that $\sum_{i=1}^N \lambda_i = 1$, it holds
+ \begin{align}
+  f\left(\sum_{i=1}^N \lambda_i\ x_i\right) \leq \sum_{i=1}^N \lambda_i f(x_i).
+ \end{align}
+\end{theorem}
+
+\begin{theorem}[Caratheodory's Theorem]
+ sdfsdf
+\end{theorem}

@@ -1,0 +1,446 @@
+In the preceding lecture, we introduced the basic quantum-theoretic entities for given quantum system with Hilbert space $\cH$. In this lecture, we consider quantum systems
+which are composed of two or more \emph{subsystems}. E.g. we need to be able to describe the statistics of experiments where two electron spins (each with Hilbert space $\cH = \bbmC^2$) are involved. 
+It is one of the major tasks in information theory, to quantify correlations between such subsystems and optimally exploit statistical properties of composite systems for usage in communication protocols. \\
+Remembering classical statistical theory (with finite sample spaces), the state of a system composed of $n < \infty$ subsystems with alphabets $\cX_1,\dots,\cX_n$ the set of states on that system 
+is the set $\cP(\cX_1 \times \cdots \times \cX_n)$ of probability distributions on the cartesian product of $\cX_1,\dots,\cX_n$. We notice, that the pure states are exactly the products of point measures, $\{\delta_{x^n}: \ x^n \in \cX^n \}$ with 
+\begin{align*}
+ \delta_{x^n}(y^n) := \prod_{i=1}^n \delta_{x_i}(y_i) && (x^n = (x_1,\dots,x_n), y^n = (y_1,\dots,y_n)).
+\end{align*} 
+Taking as an example $n=2$, we can define to each $p \in \cP(\cX \times \cX_2)$ the \emph{marginal states} $p_1 \in \cP(\cX_1), p_2 \in \cP(\cX_2)$ by
+\begin{align*}
+p_1(x_1) := \sum_{x_2 \in \cX_2} \ p(x_1,x_2), \hspace{.3cm} \text{and} \hspace{.7cm} p_2(x_2) := \sum_{x_1 \in \cX_1} p(x_1,x_2)  
+\end{align*}
+which recover the statistical properties of the individual subsystems. The systems are statistically \emph{independent}, if the state $p$ is a product distribution, i.e. with some $p_1 \in \cP(\cX_1), \ p_2 \in \cP(\cX_2)$ it holds
+\begin{align*}
+   p(A \times B) \ = \ p_1(A)\cdot p_2(B)
+\end{align*}
+for all $A \subset \cX_1$, $B \subset \cX_2$ (the usual notation is then "$p = p_1 \otimes p_2$".) We notice, that each $w \in \cP(\cX_1 \times \cX_2)$ can be written as a convex combination of product states via
+\begin{align*}
+ w \ = \ \sum_{x^n \in \cX_1 \times \cdots \times \cX_n} w(x^n)  \ \delta_{x^n}.
+\end{align*}
+Regarding a composite quantum system with subsystem Hilbert spaces $\cH_1,\dots, \cH_n$, we need to define the states on that Hilbert space. Therefore, the cartesian product $\cH_1 \times \dots \times \cH_N$ has to be equipped with a Hilbert space structure. 
+\begin{subsection}{Mathematical Interlude -- Direct sums and tensor products}
+ In this course, we will make extensive use of two different possibilites to provide the cartesian product 
+ \begin{align*}
+  V_1 \times \cdots \times V_N \ := \ \left\{ (v_1,\dots, v_N): \  v_i \in V_i, \ 1 \leq i \leq N \right\}
+ \end{align*}
+ of linear spaces $V_1,\dots, V_n$ with a linear structure, the \emph{direct sum}\index{linear space!direct sum} $V_1 \oplus \cdots \oplus V_n$ and the \emph{tensor product} $V_1 \otimes \cdots \otimes V_n$\index{linear space!tensor product}. Since we are always dealing with Euclidean
+ spaces, we assume $V_i$ to be equipped with a scalar product $\braket{\cdot,\cdot}_i$, $i = 1,\dots, n$. 
+ \end{subsection}
+ \begin{subsection}{Direct sum spaces}
+ The direct sum $V_1 \oplus \cdots \oplus V_N$ of $V_1, \dots, V_N$ is defined as the set
+ \begin{align*}
+   \left\{ \left(\begin{array}{c} v \\ w   \end{array}\right): \ v \in V_1,\ w \in V_2 \right\}
+ \end{align*}
+ together with the obvious linear structure inherited from the component spaces by using addition and scalar multiplication component-wise, i.e.
+ \begin{align*}
+  \lambda \cdot \left(\begin{array}{c} v_1 \\ \vdots \\ v_N   \end{array}\right) \ 
+  & =  \ \left(\begin{array}{c} \lambda \cdot  v_1 \\ \vdots \\ \lambda \cdot v_N   \end{array}\right) &(\lambda \in \bbmC, v_1 \in V_i, \ 1 \leq i \leq N), \ \text{and} \\ 
+  \left(\begin{array}{c} v_1 \\ \vdots \\ v_N   \end{array}\right) + \left(\begin{array}{c} w_1 \\ \vdots \\ w_N   \end{array}\right) \
+  & = \ \left(\begin{array}{c} v_1 + w_1 \\ \vdots \\  v_N + w_N   \end{array}\right) &(v_i, w_i \in V_i, \ 1 \leq i \leq N).
+ \end{align*}
+ We may also define a scalar product $\braket{\cdot,\cdot}_{1 \oplus \dots \oplus N}: V_1 \cdots \oplus V_N \rightarrow \bbmC$ by setting
+ \begin{align*}
+  \left\langle \left(\begin{array}{c}v_1 \\ \vdots \\ v_N \end{array}\right), \left(\begin{array}{c}w_1 \\ \vdots \\ w_N \end{array} \right) \right\rangle_{1 \oplus \dots \oplus N} := \sum_{i=1}^N \braket{v_i,w_i}_i 
+ \end{align*}
+ for all $v_i,w_i \in V_i$, $1 \leq i \leq N$. On the other hand, if $\cH$ is a Hilbert space, and $V_1,\dots, V_N \subset \cH$ are pairwise orthogonal linear subspaces such that for each $h \in \cH$
+ exist uniquely $h_1 \in V_1, \dots, \ h_N \in V_N$ such that $h = h_1 + \dots + h_N$, then $\cH$ is isomorphic to $V_1 \oplus \dots \oplus V_N$. We can define injections 
+ \begin{align*}
+  I_j \in \cL(V_j, \cH), \hspace{.2cm}  v \mapsto I_j (v) = (0, \dots,v, \dots, 0) &&(v \in V_j).
+ \end{align*}
+ Notice, that the adjoints are given by $I_j^\ast(h) = P_j h$, where $P_j$ is the projector onto $V_j$ for $j \in [N]$. Choosing an appropriate orthonormal basis, each $A \in \cL(\cH)$ can be 
+ written as a \emph{block matrix} \index{matrix!block}
+ \begin{align*}
+  A = \left(\begin{array}{ccc}
+  A_{11} & \cdots & A_{1N} \\ 
+  \vdots & \ddots& \vdots \\ 
+  A_{N1} & \cdots & A_{NN} \end{array}\right) 
+ \end{align*}
+ where $A_{ij} = I_j^\ast AI_i\in \cL(V_i, V_j)$ is a smaller matrix for all $i,j \in [N]$.
+ \begin{exercise}
+  Show, that 
+  if $\{v_i\}_{i=1}^{\dim V_1}\subset V_1$ and $\{w_j\}_{j=1}^{\dim V_2} \subset V_2$ are orthonormal bases in $V_1$, $V_2$, then
+   \begin{align}
+    \left\{\left(\begin{array}{c} v_i \\ 0 \end{array} \right) \right\}_{i=1}^{\dim V_1} \ \cup \ \left\{\left(\begin{array}{c} 0 \\ w_i \end{array} \right) \right\}_{j=1}^{\dim V_2}
+   \end{align}
+   is an orthonormal basis in $V_1 \oplus V_2$ according to the corresponding scalar product. In particular, $\dim V_1 \oplus V_2 = \dim V_1 + \dim V_2$.
+ \end{exercise}
+ \end{subsection}
+ \begin{subsection}{Tensor product spaces}
+  Another way to equip the cartesian product of $V_1, \dots, V_N$ with a linear structure is forming the tensor product. First, we note, that each 
+  pair $(v_1,\dots, v_N) \in V_1 \times \cdots \times V_N$ defines a $N$-linear function $v_1 \otimes  \otimes v_N: V_1 \times \dots \times V_N \rightarrow \bbmC$ by
+  \begin{align*}
+   v_1 \otimes \dots \otimes v_N (x_1,\dots, x_N) := \braket{v_1, x_1}_1\cdot \dots \cdot \braket{v_N,x_N}_N. 
+  \end{align*}
+  The definitions can be obviously extended to form linear combinations of these \emph{elementary tensors}, i.e. the rules
+  \begin{align*}
+    \lambda (v \otimes w) 
+    &= (\lambda v) \otimes w = v \otimes (\lambda w)  &(\lambda \in \bbmC, v \in V_1, w \in V_2) , \\
+    (v_1 + v_2) \otimes w 
+    &= v_1 \otimes w + v_2 \otimes w &(v_1,v_2 \in V_1, w \in V_2) \\
+    v \otimes (w_1 + w_2)
+    &= v \otimes w_1 + v \otimes w_2 &(v \in V_1, w_1, w_2 \in V_2) 
+  \end{align*}
+  apply (the rules above are formulated for $N=2$, but it is quite clear how the version for general finite $N$ looks). We can form formal linear combinations 
+  \begin{align*}
+   \sum_{i=1}^N \alpha_{i_1\dots i_N} v_{i_1} \otimes \cdots \otimes v_{i_N}
+  \end{align*}
+  of elementary tensor product vectors with coefficients $\alpha_{i_1\dots i_N} \in \bbmC$. The set 
+  \begin{align*}
+   V_1 \otimes \cdots \otimes V_N := \spann \{v_1 \otimes \cdots \otimes v_N: \  v_i \in V_i, \ 1 \leq i \leq N\}
+  \end{align*}
+  is called the tensor product of $V_1$ and $V_2$. We also can extend these structures to the linear maps. With spaces $V_1, \dots, V_N, \tilde{V}_1, \dots  
+  \tilde{V}_N$, we define the tensor product $\cL(V_1,\tilde{V}_1) \otimes \dots \otimes \cL(V_N, \tilde{V}_N)$ accordingly. For each $A_1,\dots,A_N$, $A_i \in \cL(V_i,\tilde{V_i})$, $A_1 \otimes \cdots \otimes A_N$ is the map defined by 
+  \begin{align*}
+   (A \otimes \cdots \otimes A_N)(v_1 \otimes \cdots \otimes v_N) 
+   = A_1v_1 \otimes \cdots \otimes A_N v_N
+  \end{align*}
+  for each $v_1 \in V_1, \dots, v_N \in V_N$. We have
+  \begin{align*}
+     \cL(V_1 \otimes V_2, \tilde{V}_1 \otimes \tilde{V}_2) 
+   &= \ \cL(V_1, \tilde{V}_1) \otimes \cdots \otimes \cL(V_N, \tilde{V}_N)  \\
+   &= \ \spann \{A_1 \otimes \cdots A_N: \ A_i \in \cL(V_i, \tilde{V}_i), \ 1 \leq i \leq N\}.
+  \end{align*}
+  
+ \end{subsection}
+  \begin{subsection}{Isomorphisms and representations} 
+ 
+ In calculations and proofs, it is sometimes advantageous, to transfer the objects under investigation to another space. In the following we collect some isomorphisms
+ which are often used. The definitions below are defined for members of the canonical euclidean orthonormal basis, but extend -- by linearity -- to all elements of the underlying spaces. 
+ \begin{enumerate}
+  \item 
+ \begin{align*}
+   \Sigma: \ \bigoplus_{i=1}^N \cH \   
+   \rightarrow \ \cH \otimes \bbmC^N,  \hspace{.8cm}
+    \left(\begin{array}{c} v_1 \\ \vdots \\ v_N \end{array} \right)  \mapsto \sum_{i=1}^N v_i \otimes e_i 
+ \end{align*}
+ \item 
+ \begin{align}
+  \Gamma: \ \cL(\cH_1,\cH_2) \ \rightarrow \ \cH_1 \otimes \cH_2 \hspace{.8cm} \ket{v}\bra{w} \  \mapsto \ \ket{\overline{w}} \otimes \ket{v} \label{def:iso_gamma}
+ \end{align}
+ \item 
+ \begin{align*}
+  \Lambda: \ \cL(\bbmC^M \otimes \bbmC^N) \ 
+   \rightarrow  \ \cL\left(\bigoplus_{i=1}^M \bbmC^N\right) \ \hspace{.8cm}
+   \ket{e_i} \bra{e_j} \otimes \ket{e_k}\bra{e_l} \
+   \mapsto  I_i^\ast \ket{e_k}\bra{e_l} I_j
+  \end{align*}
+ \end{enumerate}
+With the preparations, we are able to define quantum states on composite systems.
+\begin{definition} 
+ The set of states of a composite system with $N < \infty$ subsystems, $\cH_i$ being the Hilbert space of the $i$-th subsystem is given by the set
+ \begin{align*}
+  \cS\left(\bigotimes_{i=1}^N \ \cH_i \right)
+ \end{align*}
+ of density matrices on the tensor product $\bigotimes_{i=1}^{N} \ \cH_i := \cH_1 \otimes \dots \otimes \cH_N$ of the spaces $\cH_1, \dots \cH_N$. 
+\end{definition}
+A corresponding map to form ``marginal states'' on subsystems is given by the partial trace, which we define for notational simplicity for bipartite
+systems (i.e. composite systems consisting of two subsystems). 
+\begin{definition}[Partial trace] \index{partial trace} \index{trace!partial}
+ For two Hilbert spaces $\cH_1, \cH_2$, the partial trace (over $\cH_2$) is the linear map
+ \begin{align*}
+  \tr_{\cH_2}: \ \cL(\cH_1 \otimes \cH_2) \rightarrow \cL(\cH_1) 
+ \end{align*} 
+ defined by 
+ \begin{align*}
+  \tr_{\cH_2}(\ket{u \otimes v}\bra{ w \otimes x}) := \braket{x,v} \ket{u}\bra{w} &&(u,w \in \cH_1, \ v,x \in \cH_2)
+ \end{align*}
+ plus linear extension. The corresponding partial trace over $\cH_1$, $\tr_{\cH_1}$ is defined analogeously. 
+\end{definition}
+ We demonstrate by example, how the partial trace can be calculated. Let $\cH_1, \cH_2$ be Hilbert spaces, $\dim \cH_i = d_i$, $i = 1,2$.  
+ Let $A \in \cL(\cH_1 \otimes \cH_2)$, with orthonormal tensor basis decomposition
+ \begin{align*}
+  A = \sum_{i,j=1}^{d_1} \sum_{k,l=1}^{d_2} \ a_{ijkl} \ \ket{f_i \otimes g_k} \bra{f_j \otimes g_l}. 
+ \end{align*}
+ Then, we calculate
+ \begin{align*}
+  \tr_{\cH_2}(A) 
+  &= \sum_{i,j=1}^{d_1} \sum_{k,l=1}^{d_2} \ a_{ijkl} \ \tr_{\cH_2}(\ket{f_i \otimes g_k} \bra{f_j \otimes g_l}) \\
+  &= \sum_{i,j=1}^{d_1} \sum_{k}^{d_2} \ a_{ijkl} \ \braket{f_l, f_k} \cdot \ket{f_i} \bra{f_j} \\
+  &= \sum_{i,j=1}^{d_1}  \left(\sum_{k}^{d_2} \ a_{ijkk}\right)  \cdot \ket{f_i} \bra{f_j}.
+ \end{align*}
+  Note, that the definition of partial traces easily extends to composite systems with more than two subsystems. Let $N$ parties (each of them with Hilbert space 
+  $\cK_i$ assigned, share a system with Hilbert space $\cK_1 \otimes \dots \otimes \cK_N$. To apply the partial trace on the $j$-th system one uses the definition
+  above with $\cH_1 = \bigotimes_{i \neq j} \cK_i$, $\cH_2 := \cH_i$ and so on...
+  \begin{proposition}
+  Let $A \in \cL(\cH_1 \otimes \cH_2)$. It holds 
+  \begin{enumerate}
+   \item $\tr(A) = \tr(\tr_{\cH_1}(A)) = \tr(\tr_{\cH_2}(A))$,
+   \item $\tr(\tr_{\cH_2}(A)B) = \tr(A(B \otimes \bbmeins_{\cH_2}))$,
+   \item $A \geq 0 \ \Rightarrow \ \tr_{\cH_2}(A) \geq 0$,
+   \item $\rho \in \cS(\cH_1 \otimes \cH_2) \ \Rightarrow \ \tr_{\cH_2}(\rho) \in \cS(\cH_2)$. 
+  \end{enumerate}
+ \end{proposition}
+  \begin{proof}
+   The claims of the proposition can be verified by straightforward calculation, left as an exercise. As an example, we show the second claim. Let $x \in \cH_1$, $\|x\| =1$. Note, that 
+   \begin{align*}
+    P:= \ket{x}\bra{x} \otimes \bbmeins_{\cH_2}
+   \end{align*}
+   is a projection. We have
+   \begin{align*}
+    \braket{x, \tr_{\cH_2}(A) x}  
+    \ =\ \tr(\ket{x}\bra{x} \tr_{\cH_2}(A)) 
+    \ =\ \tr(A^{\tfrac{1}{2}}PA^{\tfrac{1}{2}}) 
+    \ \geq\  0.
+   \end{align*}
+  \end{proof}
+  Here, we may point out a significant difference between the concept of a bipartite state in classical theory and quantum theory. As noticed earlier, each classical bipartite state (i.e. probability distribution on a product alphabet) 
+   can be written as a convex combination of product distributions. Quantum probability 
+   offers an additional class of states beyond. 
+  \begin{definition} \label{def:bipartite_state_classification}
+   A state $\rho \in \cS(\cH_1 \otimes \cH_2)$ is called
+   \begin{enumerate}
+    \item[(i)] \emph{"uncorrelated", "product state"} \index{quantum state!product}, if it can be written $\rho = \rho_1 \otimes \rho_2$ for some $\rho_1 \in \cS(\cH_1)$, $\rho_2 \in \cS(\cH_2)$. 
+    \item[(ii)] \emph{"separable state"} \index{quantum state!separable}, if it admits the form 
+    \begin{align*}
+     \rho = \sum_{i=1}^N \lambda_i \ \rho_1^{(i)} \otimes \rho_2^{(i)}
+    \end{align*}
+    with $N \in \bbmN$, $\lambda_i \in (0,1)$, $\rho_1^{(i)} \in \cS(\cH_1)$, and $\rho_2^{(i)} \in \cS(\cH_2)$ for all $i \in [N]$, $\sum_{i=1}^N \lambda_i = 1$. 
+    \item[(iii)] \emph{entangled} \index{quantum state!entangled} otherwise.
+   \end{enumerate}
+  \end{definition}
+   \begin{remark}
+    One could ask about infinite or even uncountable convex combinations of product states. These are identified as uncorrelated by means of Caratheodory's theorem. 
+    It asserts, that for given convex subset $A \subset \bbmR^d$, each element $x \in A$ can be written as a convex combination of at most $d+1$ extremal elements in 
+    $A$. Consequently, each separable state can be written as a finite convex combination of not more than $2d+1$ product states. 
+   \end{remark}
+   A closer look at Definition \ref{def:bipartite_state_classification} reveals, that beyond the convex combinations of product states (of which the product states itself are a trivial
+   subclass), there is another class of states having no classical counterpart. The class of entangled states is indeed nonempty, as the following example demonstrates.
+	Let two unit vectors $\varphi_1, \varphi_2 \in \bbmC^d$ with $\varphi_1 \perp \varphi_2$, and nonzero coefficients $\alpha, \beta \in \bbmC$, $|\alpha|^2 + |\beta|^2 = 1$ be given. We
+	show, that 
+	\begin{align}
+	\eta  \ = \ \alpha \varphi_1 \otimes \varphi_1 + \beta \varphi_2 \otimes \varphi_2 \label{ex_entangled_state_1}
+	\end{align}
+    is state vector of an entangled state. In fact, the assumption, that $\eta$ is separable leads to a contradiction. Let $\{\varphi_1,\varphi_2,\dots,\varphi_d\}$ be an extension of $\varphi_1,\varphi_2$ to an orthonormal basis in $\bbmC^d$. Since $\eta$ is pure and separable, it takes the form of a product vector
+    \begin{align}
+     \eta \ = \ \left(\sum_{i=1}^d c_i \varphi_i \right) \otimes \left(\sum_{i=1}^d \tilde{c}_j \varphi_j\right) \ = \ \sum_{i,j=1}^d c_i \tilde{c}_j \varphi_i \otimes \varphi_j.
+     \label{ex_entangled_state_2}
+    \end{align}
+    Comparing coefficients in (\ref{ex_entangled_state_1}) and (\ref{ex_entangled_state_2}), shows, that 
+    \begin{align}
+     c_1 \cdot \tilde{c}_1 \ = \alpha, \hspace{.3cm} c_2 \cdot \tilde{c}_2 \ = \beta, \hspace{.3cm} c_i \cdot \tilde{c_j} \ = \ 0 \ \text{for} \  i \neq j \ \text{or} \ i,j > 2.
+    \end{align}
+    As a consequence of the above equalities, $\alpha \cdot \beta = c_1 \cdot \tilde{c}_2 \cdot \tilde{c}_1 \cdot c_2  = 0$, which is a contradiction to $\alpha, \beta \neq 0$. We record
+   \begin{example}
+	A pure bipartite state $\eta = \alpha \cdot \varphi_1 \otimes \varphi_1 + \beta \cdot \varphi_2 \otimes \varphi_2$, $|\alpha|^2 + |\beta|^2 = 1$ is entangled if and only if $\alpha, \beta \neq 0$.
+   \end{example}
+
+	\end{subsection}
+	\begin{subsection}{Schmidt decomposition}
+    Especially useful is the following ``polar'' representation of vectors on a tensor product. 
+   \begin{theorem}\label{theorem:schmidt_decomposition} \index{decomposition!Schmidt -}
+    Let $a \in \cH_1 \otimes \cH_2$. Then there exist ortonormal systems $\{v_i\}_{i=1}^m \subset \cH_1$, $\{w_i\}_{i=1}^m \subset \cH_2$ and numbers 
+    $\alpha_1 \geq \alpha_2 \geq \dots \geq \alpha_m > 0$, such that 
+    \begin{align*}
+     a = \sum_{i=1}^m \sqrt{\alpha_i} v_i \otimes w_i \label{theorem:schmidt_decomposition_1}
+    \end{align*}
+    holds. 
+   \end{theorem}
+   \begin{remark}
+    \begin{enumerate}
+     \item $m$ is usually called the \emph{Schmidt number}\index{Schmidt number} of $a$, $\sqrt{\alpha_1}, \dots, \sqrt{\alpha_m}$ the \emph{Schmidt coefficients}
+     \index{Schmidt coefficients}.
+     \item It holds 
+     \begin{align*}
+      A_1 := \tr_{\cH_2}(\ket{a}\bra{a}) &= \sum_{i=1}^{m} \alpha_i \ket{v_i}\bra{v_i} \\
+      A_2 := \tr_{\cH_1}(\ket{a}\bra{a}) &= \sum_{i=1}^{m} \alpha_i \ket{w_i}\bra{w_i}. 
+     \end{align*}
+      In particular the Schmidt coefficients are the nonzero eigenvalues (counted with their multiplicities), and the vectors in the orthonormal systems which appear in 
+      the Schmidt decomposition are the corresponding eigenvectors.
+    \end{enumerate}
+	\end{remark}
+    Though formulated for general bipartite vectors, we will use the Schmidt decomposition most of the time for pure quantum states. 
+    The Schmidt decomposition Theorem is essentially a reformulation of the singular value decomposition, see Theorem \ref{thm:svd}. 
+    \begin{proof}[Proof of Theorem \ref{theorem:schmidt_decomposition}]
+	 Using the inverse of the linear isomorphism $\Gamma$ from (\ref{def:iso_gamma}), we
+	 obtain a matrix $A = \Gamma^{-1}(\ket{a})$. Let
+	 \begin{align*}
+	 A = \sum_{i,j=1}^{m} \sqrt{\alpha_i} \ket{v_i}\overline{\bra{w_i}}
+	 \end{align*}
+	 be a singular value decomposition of $A$. Then 
+	 \begin{align*}
+	  a \ = \Gamma \circ \Gamma^{-1} a = \sum_{i=1}^m \sqrt{\alpha_i} \ \Gamma(\ket{w_i}\overline{\bra{v_i}}) = \sum_{i=1}^m \sqrt{\alpha_i} v_i \otimes w_i.
+	 \end{align*}
+    \end{proof}
+	As we will see in forthcoming lectures, Schmidt decomposition is a very convenient way to write a pure bipartite state in proofs and calculations. Unfortunately, there seems to be no general satisfactory extension of Theorem \ref{theorem:schmidt_decomposition} to spaces with more than two tensor factors. Nevertheless, Schmidt decompositions allows us to construct "purifications" of states, we define.
+	\begin{definition}[Purification] \index{purification}		
+	  Let $\rho \in \cS(\cH)$ be a state, and $\cK$ be an additional Hilbert space. The pure state $\ket{\Psi}\bra{\Psi}$ is a \emph{purification} of $\rho$ if, $\tr_\cK \ket{\Psi}\bra{\Psi} = \rho$. 
+	\end{definition}
+	The Schmidt decomposition offers a nice principle to construct purifications of a state $\rho$. By the remark following Theorem \ref{theorem:schmidt_decomposition}, the Schmidt coefficients and the orthonormal vectors in one tensor factor in Schmidt decompositions are obtained from a spectral decomposition of $\rho$. The remaining Schmidt vectors can be chosen freely on any Hilbert space of sufficient dimension (see Exercise \ref{ex:schmidt_dec}). 
+		\begin{observation} \label{obs:mon_ent}
+		A quantum system in a pure state can only be uncorrelated to the ``outside world'', i.e. if $\rho \in \cS(\cH \otimes \cK)$ is such that $\tr_\cK \rho$ is pure, it is necessarily a product state.
+	\end{observation}
+	The above observation also holds in for the classical statistical theory. However, in quantum information theory, this insight becomes a powerful tool when combined with the possiblity to "purify" quantum systems. The bipartite pure state resulting from purification captures all correlations of the system "to the outside world". This is a "quantum feature", since purifying systems is not possible in classical theory (see Exercise \ref{ex:class_pur}.)
+	\end{subsection}
+     \begin{section}{Supplement: Entanglement witnesses}
+      \begin{definition}[Entanglement witness]
+      A matrix $A \in \cL^h(\cH_A \otimes \cH_B)$ is called an \emph{entanglement witness} \index{entanglement!witness}, if it is not positive semidefinite, and 
+      \begin{align}
+       \tr A(\rho \otimes \sigma) \geq 0 
+      \end{align}
+      for all $\rho \in \cS(\cH_A)$, $\sigma \in \cS(\cH_B)$. An entangled state $\tau$ is said to be \emph{detected} by $A$, if 
+      \begin{align}
+       \tr A \tau < 0.
+      \end{align}
+     \end{definition}
+
+     \begin{definition}
+      A hyperplane in $\bbmR^m$ is a set of the form
+      \begin{align}
+       H(\xi, k) := \{z \in \bbmR^m: \braket{\xi,z} = k\},
+      \end{align}
+      where $\xi \in \bbmR^m \setminus \{0\}$, and $k \in \bbmR$. $H(\xi,k)$ is said to separate two sets $S_1, S_2 \subset \bbmR^m$, if 
+     \end{definition}
+     Some properties 
+     \begin{enumerate}
+      \item $H(\xi,k) \perp span \{\xi\}$
+      \item $\forall x,y \in H(\xi,k) ,\lambda \in \bbmR$, it holds $\braket{\lambda, \xi, x -y}$
+     \end{enumerate}
+     
+     
+     \begin{theorem}[Separating Hyperplanes] \label{thm:separating_hyperplanes}
+     If $S$ is a closed convex subset of $\bbmR^m$, and $x_0 \notin S$, then there exists a hyperplane separating $x_0$ and $S$.
+     \end{theorem}
+  
+     \begin{proof}
+      First step. We show, that there is a unique $s_0 \in S$ minimizing the distance $|s-x_0|$. Such an $s_0$ exists, because $S$ is closed. Namely, choosing a sequence $\{s_i\}_{i \in \bbmN}$ such that 
+      \begin{align}
+       \underset{k \rightarrow \infty}{\lim}|s_k - x_0| = \underset{s \in S}{\inf}|s - x_0|
+      \end{align}
+      holds. By the Bolzano-Weierstrass Theorem (``Every bounded sequence has a convergent subsequence''), we find a subsequence $\{s_{k(j)}\}_{j=1}^\infty$, which converges to an $s_0 \in \bbmR^m$, which is 
+      also a member of $S$, since by hypothesis, $S$ is closed. Consequently,
+      \begin{align}
+       |s_0 - x_0| \ = \ \underset{j \rightarrow \infty}{\lim} |s_{k(j)} - x_0| \ = \ \underset{k \rightarrow \infty}{\lim} |s_k - x_0| \ = \ \underset{s \in S}{\inf} |s -x_0|.
+      \end{align}
+      We show uniqueness by contradiction. Assume that another element $s' \in S$ also fulfills the mentioned condition, i.e.   
+      \begin{align}
+       |s' - x_0|  \ = \ \underset{s \in S}{\inf} |s' - x_0|. 
+      \end{align}
+      Then $|s' - x_0| = |s_0 - x_0|$, and $x_0, s_0, s'$ form an isosceles triangle. But then the midpoint of $\overline{s_0s')}$ (which is by convexity of $S$ also a member of $S$), is closer to $x_0$ than $s_0$, a 
+      contradiction! \\
+      As a second step, we construct a hyperplane which separates $s_0$ and $x_0$. We set
+      \begin{align}
+       \xi := x_0 - s_0, \ \text{and} \hspace{.5cm} \hat{\xi} := s_0 + \tfrac{1}{2} \xi.
+      \end{align}
+      We have
+      \begin{align}
+       k \ := \ \braket{\xi,\hat{\xi}} \ = \ \braket{x_0 - s_0, \tfrac{1}{2}(x_0 + s_0)} \ = \ \tfrac{1}{2}(|x_0|^2 - |s_0|^2).
+      \end{align}
+      By construction, $H(\xi, k)$, the hyperplane perpendicular to $\xi$, going through $\hat{\xi}$, fulfills
+      \begin{align}
+       0 \ < \ \tfrac{1}{2} |s_0 - x_0|^2 = \frac{1}{2}(\braket{\xi,s_0} - \braket{\xi,x_0})
+      \end{align}
+      Therefore, $H(\xi, k)$ is a separating Hyperplane for $s_0$ and $x_0$, since
+      \begin{align}
+       \braket{\xi, x_0} \ < \frac{1}{2}(\braket{\xi,s_0} - \braket{\xi,x_0}) \ < \ \braket{\xi, s_0}.
+      \end{align}
+      In the last two steps of the proof, we convince ourselves, that $H(\xi, k)$ is indeed separating $x_0$ and $S$. \\
+      Step three. We show $H(\xi,k) \cap S = \emptyset$. Assume that $s_1 \in H(\xi,k) \cap S$, i.e. $\braket{\xi,s_1} = k$. Consider the isosceles triangle with vertices $s_1,x_0,s_0$. Let $s_2$ be a point on
+      $\overline{s_0s_1}$ for which $\overline{xs_2} \perp \overline{s_0s_1}$. Then 
+      \begin{align}
+       |x_0 - s_2| \ < \ |x_0-s_0|,
+      \end{align}
+      which is a contradiction, because $s_2 \in S$. consequently the constructed hyperplane and $S$ do not intersect. \\
+      Fourth step. We show, again by contradiction, that $\braket{\xi, s} > k$ for all $s \in S$, i.e. $H(\xi, k)$ separates $S$ from $x_0$. Assume hat $s_1 \in S$ and $\alpha_1 := \braket{\xi,s_1} \leq k$. 
+      We already know from Step 2, that $\alpha_0 := \braket{\xi,s_0} > k$. Define
+      \begin{align}
+       \lambda \ := \ \frac{k - \alpha_1}{\alpha_0 - \alpha_1}.
+      \end{align}
+      Notice, that $\lambda$ is in $[0,1)$, since
+      \begin{align}
+       \alpha_0 \ > \ k \ \geq \alpha_1.
+      \end{align}
+      By convexity of $S$, 
+      \begin{align}
+       s_2 := \lambda s_0 + (1-\lambda) s_1 \  \in \ S,
+      \end{align}
+      which is a contradiction, because
+     \begin{align}
+      \braket{\xi,s_2} = \lambda \alpha_0 + (1-\lambda) \alpha_1 = k.
+     \end{align}      
+     \end{proof}
+     Although we formulated the separating hyperplane Theorem for $\bbmR^m$ and euclidean scalar product $\braket{\cdot,\cdot}$, there is no obstacle in using it for the set $\cL(\cH)$ equipped with the Hilbert scalar 
+     product $\braket{\cdot,\cdot}_{HS}$ on that space. Indeed $\Gamma: \ \bbmR^{2m^2} \ \rightarrow \ \cL(\cH)$ with
+     \begin{align}
+      A \ \mapsto (\Re(a_{11}),\dots, \Re(a_{mm}),\Im(a_{11}), \dots, \Im(a_{mm}))
+     \end{align}
+     sets up a linear isomorphism between $\bbmR^{2m^2}$ and $\cL(\cH)$, and it is easily checked, that
+     \begin{align}
+      \braket{A,B}_{HS} \ = \ \braket{\Gamma(A), \Gamma(B)} 
+     \end{align}
+     for all $A,B \in \cL(\cH)$. 
+     \begin{theorem}
+      A state $\rho \in \cS(\cH_A \otimes \cH_B)$ is
+     \begin{itemize}
+      \item separable, if and only if $\tr\rho A \geq 0$ for each entanglement witness $A$. 
+      \item entangled, if and only if there exists an entanglement witness $A$, such that $\tr \rho A < 0$.
+     \end{itemize}
+     \end{theorem}
+     \begin{proof}
+      The both claims of the above theorem are easily seen to be equivalent. We prove the first claim. Asssume, that $\rho$ is separable. By defnition, $\tr \rho A \geq 0$ for each entanglement 
+      witness $A$. for the converse statement, we notice, that the set of separable states on $\cS(\cH_A \otimes \cH_B)$ is a closed convex subset of $\cL(\cH)$. By Theorem \ref{thm:separating_hyperplanes} and
+      the remark after its proof, we find a Hyperplane $H(A,k) \subset \cL(\cH)$, such that $\braket{A,\sigma}_{HS} \geq k$ for each member $\sigma$ of the separable density matrix, and $\braket{A,\rho} < k$.
+      Consequently, $A - k \bbmeins_{\cH_A \otimes \cH_B}$ is an entanglement witness for $\rho$.
+     \end{proof}
+    \end{section}
+   \begin{section}{Exercises}
+     \begin{exercise}[Non-cyclicity of the partial trace]
+     	Find an example of matrices $A,B \in \cL(\cH_1 \otimes \cH_2)$ such that 
+     	$\tr_{\cH_2}(AB) \ \neq \ \tr_{\cH_2}(BA)$ holds.
+     \end{exercise}
+     
+   \begin{exercise}[Compatibility problems]
+   Let $q \in \cP(\cX_1 \times \cX_2)$, $r \in \cP(\cX_2 \times \cX_3)$ be probability distributions. They are called \emph{compatible}, if there is a probability distribution $p \in \cP(\cX_1 \times \cX_2 \times \cX_3)$ 
+   having $q$ and $r$ as marginals on $\cX_1 \times \cX_2$ and $\cX_2 \times \cX_3$ respectively. 
+   \begin{itemize}
+    \item Show, that $q, r$ are compatible if and only if their marginals on the ``shared alphabet'' $\cX_2$ coincide.
+    \item Show, by counterexample, that an analogue of the above equivalence does not hold for density matrices. (Hint: Monogamy of entanglement).
+   \end{itemize}
+   \end{exercise}
+   \begin{exercise}
+    Mixing may cause destruction of entanglement. Convince yourself by straightforward calculation, that the equidistributed mixture 
+    \begin{align}
+     \rho := \frac{1}{2}(\ket{\Phi_+}\bra{\Phi_+} + \ket{\Phi_-}\bra{\Phi_-})
+    \end{align}
+   of the so-called singlet states with state vectors $\Phi_+$ and $\Phi_-$,
+   \begin{align}
+    \Phi_{\pm} := \frac{1}{\sqrt{2}}( e_0 \otimes e_0 \pm e_1 \otimes e_1 ) 
+   \end{align}
+   is in fact separable.
+   \end{exercise}
+   \begin{exercise}
+    The set of separable density matrices in $\cS(\cH_A \otimes \cH_B)$ is convex by definition. What are the extremal elements?
+   \end{exercise}
+	\begin{exercise}\label{ex:schmidt_dec}
+		Let $\rho \in \cS(\cH)$ be a quantum state. What is the minimum dimension of a Hilbert space $\cK$ such that we find a purification of $\rho$ on $\cS(\cH \otimes \cK)$?
+    \end{exercise}
+    \begin{exercise}
+	  Let $\rho \in \cS(\cH)$ be a density matrix with spectral decomposition $\sum_{i=1}^r \lambda_i \ket{f_i}\bra{f_i}$. Show, that with a pure maximally entangled state $\Phi := \ket{\phi}\bra{\phi}$ with state vector
+	  \begin{align*}
+	   \phi \ := \ \frac{1}{\sqrt{r}} \sum_{i=1}^{r} f_i \otimes f_i
+	  \end{align*} 
+	  on $\cH \otimes \cH$, 
+	  \begin{align*}
+		 \psi := (\bbmeins_{\cH} \otimes \rho^{\frac{1}{2}})\phi 
+	  \end{align*}
+	  is state vector of a purification of $\rho$.
+    \end{exercise}
+	\begin{exercise}[Classical purifications] \label{ex:class_pur}
+	Let $p \in \cP(\cX)$ be mixed. There exists no $\cY$ such that $r \in \cP(\cX \times \cY)$ is pure and the $\cX$-marginal is $p$.
+	\end{exercise}
+  %   \margpar{Include \begin{itemize}
+  %   		\item Exercises on Block matrices
+  %   		\item Positivy preservation under isomorphisms
+   %  		\item GHZ state
+  %   	\end{itemize}}
+   \end{section}
+   
+    
+
+ 
+ 
+ 
+  
+ 
+ 
+   

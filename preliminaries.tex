@@ -1,0 +1,205 @@
+In this lecture we review some basic mathematical definitions which may in most parts be taught in usual higher math courses. At the same time we fix the notation for the forthcoming lectures, and get used to the so-called Dirac notation common in quantum (information) theory. 
+
+\begin{section}{Linear algebra}
+The mathematical playground for quantum theory are \emph{Hilbert spaces} \index{Hilbert space} (i.e. a linear space with a scalar product, which is closed in the norm deriving from the
+scalar product.) For this course, we will assume, that each Hilbert space is a finite dimensional euclidean space over the field of complex numbers. Under this restriction, the terminology ``Hilbert space'' 
+is rather superfluous. However, it is standard in the quantum information theory literature also for finite dimensions, therefore, we keep it. \newline 
+If we fix a basis for an Hilbert space $\cH$,  $d:= \dim \cH < \infty$, $\cH$ is isomorph to $\bbmC^d$, where each vector $v \in \cH$ corresponds to a column vector 
+\begin{align}
+  v = \left(\begin{array}{c} v_1 \\ \vdots  \\ v_d \end{array}\right) 
+\end{align}
+with entries $v_1,\dots, v_d \in \bbmC$. We use the standard euclidean scalar product $\braket{\cdot,\cdot}: \cH \times \cH \ \rightarrow \bbmC$ defined by
+\begin{align}
+ \braket{v,w} \ := \ \sum_{i=1}^d \overline{v}_i w_i  
+\end{align}
+for each $v = (v_1,\dots,v_d), \ w = (w_1,\dots,w_d) \ \in \bbmC^d$ (where $\overline{v}$ is the notation for the complex conjugate of $v$.) \\
+We will freely switch between the abstract and component notation, i.e. assuming that an orthonormal basis is fixed, we will not distinguish between a $d$-dimensional Hilbert space 
+$\cH$ and $\bbmC^d$. If not otherwise stated, we assume the basis to be the canonical orthonormal basis $\{e_i\}_{i=1}^d$ where 
+\begin{align}
+  e_i := \left(\begin{array}{c} 0 \\ \vdots \\ 1 \\  \vdots \\ 0 \end{array}\right)
+\end{align}
+with the $i$-th entry being $1$ and all other entries being $0$. With two Hilbert spaces $\cH$, and $\cH'$ we denote the set of linear maps from $\cH$ to $\cH'$ by $\cL(\cH,\cH')$. 
+If we fix a bases in the underlying spaces $\cH$, $\cH'$, $\cL(\cH,\cH')$ is isomorphic to the set
+%\begin{align}
+ $\bbmM_{d \times d'}(\bbmC)$
+%\end{align}
+of $d \times d'$ matrices with complex entries, sometimes, we will also write a matrix $A$ as the collection of its entries. $A = (a_{ij})_{i=1,j=1}^{m,n}$ then corresponds to the matrix 
+\begin{align}
+ A := \left( \begin{array}{ccc} a_{11} & \cdots & a_{1n} \\ \vdots & \ddots & \vdots \\ a_{m1} & \cdots & a_{mn} \end{array} \right) 
+\end{align}
+If $\cH'$ equals $\cH$, we will also use the shortcut $\cL(\cH)$ for the set $\cL(\cH,\cH')$. We denote the \emph{adjoint matrix} to $A$ by $A^\ast$, the \emph{transposed matrix} to $A$ by $A^T$, i.e. 
+\begin{align}
+ A^\ast := \left( \begin{array}{ccc} \overline{a}_{11} & \cdots & \overline{a}_{m1} \\ \vdots & \ddots & \vdots \\ \overline{a}_{1n} & \cdots & \overline{a}_{nm} \end{array} \right) \hspace{.5cm} \text{and} \hspace{.5cm}
+ A^T := \left( \begin{array}{ccc} a_{11} & \cdots & a_{m1} \\ \vdots & \ddots & \vdots \\ a_{1n} & \cdots & a_{nm} \end{array} \right).
+\end{align}
+The reader should note, that the transposition is dependent on the chosen basis, while the adjoint is not. The \emph{trace} of a square matrix $A \in \cL(\cH)$ is defined by
+\begin{align}
+ \tr(A) := \sum_{v_i, A v_i},
+\end{align}
+where $\{v_1,\dots, v_{\dim_{\cH}}\}$ is an orthonormalbasis in $\cH$. Using the trace, we can define the \emph{Hilbert-Schmidt scalar product} on $\cL(\cH)$, 
+\begin{align}
+ \braket{A,B}_{HS} \ := \ \tr(A^\ast B) &&(A,B \in \cL(\cH)).
+\end{align}
+By the (finite dimensional) Riesz representation theorem, there is a one-to-one relationship between $\cH$ and its dual space $\cH^\ast$, i.e. to each 
+linear functional $f \in \cH^\ast$ there is a unique element $v_f \in \cH$, such that 
+\begin{align}
+ f(w) := \braket{v_f, w} 
+\end{align}
+for each $w \in \cH$. This fact is reflected by the so-called \textbf{Dirac notation}\index{Dirac notation}. In this notation, each element $v \in \cH$ is written as a ``ket'' \index{``ket''} $\ket{v}$, while the
+corresponding element $v^\ast \in \cH^\ast$ with 
+\begin{align}
+  v^\ast(w) = \braket{v,w} 
+\end{align}
+for each $w \in \cH$ is written as a ``bra'' \index{``bra''} $\bra{v}$. Note, that $\bra{\alpha \cdot v} = \overline{\alpha} \bra{v}$ for all $\alpha \in \bbmC$. Moreover, $\bra{v_1 + v_2} = \bra{v_1} + \bra{v_2}$. 
+The \emph{outer product} \index{product!outer} of $w \in \cH,   \in \cH'$, $\ket{v}\bra{w} \in \cL(\cH, \cH')$ is the rank one matrix with the property, 
+that 
+\begin{align}
+  (\ket{v}\bra{w})\ket{x} = \braket{w,x} \ket{v}
+\end{align}
+holds for all for all $x \in \cH$. It holds $(\ket{v}\bra{w})^\ast = \bra{w}\ket{v}$. The canonical basis in $\cL(\cH, \cH')$ is given by the \emph{matrix units} \index{matrix!unit} $\{E_{ij}\}_{i=1,j=1}^{\dim \cH, \cH'}$, where $E_{ij}$ is the matrix with the $i,j$-entry being
+one and all others being zero. 
+The following subsets of $\cL(\cH)$ will be of some importance for our considerations. 
+\begin{align*}
+ \cL^h(\cH) &:= \{A \in \cL(\cH): \ A^\ast = A  \}   					&\text{(Hermitian maps)} \\ 
+ \cL^+(\cH) &:= \{A \in \cL(\cH): \ \forall x \in \cH: \ \braket{x,Ax} \geq 0\}	&\text{(positive semidefinite maps)} 
+\end{align*}
+\index{map!positive semidefinite} We call a map $p \in \cL(\cH)$ an \emph{(orthogonal) projection} \index{projector}, if it is hermitian and idempotent, i.e. $p = p p = p^2$.  \\
+ We call a number $\lambda \in \bbmC$ an eigenvalue \index{eigenvalue} of $A \in \bbmM_n$, if there exists $x \in \bbmC^n$, $x \neq 0$, such that $Ax = \lambda x$ (in wich case $x$ is called
+ an eigenvector for $A$ to eigenvalue $\lambda$, equivalently, $\lambda$ is an eigenvalue. 
+  We denote the spectrum of $A$ (the set of eigenvalues) by $\spec(A)$. 
+We say two maps $A,B \in \bbmM_n$ commute, if their commutator \index{commutator}, i.e. the function
+\begin{align}
+ [A,B] := AB -BA 
+\end{align}
+vanishes. A very important consequence of being hermitian is existence of an orthonormal basis of eigenvectors, i.e. a spectral decomposition. 
+\begin{theorem}[Spectral decomposition] \index{decomposition!spectral}
+ Let $A \in \cL(\cH)$ be normal. Then there exists an orthonormal basis $\{v_i: \ 1 \leq i \leq \dim \cH \}$, such that 
+ \begin{align}
+  \sum_{i = 1}^{\dim \cH} \alpha_i \ket{v_i}\bra{v_i}
+ \end{align}
+ holds. The numbers $\alpha_1,\cdots, \alpha_{\dim \cH}$ are the eigenvalues of $A$ (counted with multiplicities).
+ \end{theorem}
+ If $A \in \cL^h(\cH)$, then all eigenvalues are real numbers. 
+ \begin{theorem}[Singular value decomposition] \label{thm:svd}
+ Let $A \in \cL(\cH, \cK)$. Then there exist orthonormal systems $\{\varphi\}_{i=1}^r \subset \cH$ and $\{\psi\}_{j=1}^r \subset \cK$ such that 
+ \begin{align}
+   A = \sum_{i,j=1}^r \sigma_j(A) \ket{\varphi_i}\bra{\psi_j}
+ \end{align}
+ holds, where $r$ is the rank of $A$ and $\sigma_1(A) \geq \dots \geq \sigma_r(A) > 0$ are the singular values (i.e. the eigenvalues of the positive semidefinite matrix $A^\ast A$.)
+ \end{theorem}
+  The spectral theorem allows to exted real functions in a natural way to hermitian matrices. Let $\cW \subset \bbmR$, and
+ $f: \cW \rightarrow \bbmR$. We define for each hermitian map $A \in \cL(\cH)$ with $\spec(A) \subset \cW$
+ \begin{align}
+  f(A) := \sum_{i=1}^{\dim \cH} f(\alpha_i) \ket{v_i} \bra{v_i},
+ \end{align}
+ using a spectral decomposition $A := \sum_{i = 1}^{\dim \cH} \alpha_i \ket{v_i} \bra{v_i}$. Particular examples of such matrix-functions we consider in this lecture are 
+ the square-root, the exponential functions and logarithms.
+ \begin{remark}
+  Using matrix functions one has to be very cautious when applying properties of the real functions in the matrix setting. E.g. the identities
+  \begin{align}
+   \sqrt{AB} = \sqrt{A}\sqrt{B}, \ \text{and} \ \exp{A+B} = \exp{A}\exp{B} 
+  \end{align}
+  do not hold in general. We also can define a matrix version of the absolute value of a complex number. 
+  \begin{theorem}[Polar decomposition] \index{decomposition!polar}
+  Let $A \in \cL(\cH,\cK)$. We can write $A$ in the form 
+  \begin{align}
+   A := |A|U 
+  \end{align} 
+  where $|A| := \sqrt{A^\ast A}$, and $U$ is a (partial) isometry.
+ \end{theorem}
+ \end{remark}
+ Important norms on $\cL(\cH, \cH')$ are 
+ \begin{align}
+  \|A\|_1 &:= \tr \sqrt{A^\ast A} & \text{(trace norm)} \\
+  \|A\|_2 &:= \sqrt{\tr A^\ast A} = \sqrt{\braket{A,A}_{HS}} & \text{(Hilbert-Schmidt norm)}
+ \end{align} \index{trace norm} \index{Hilbert-Schmidt norm}
+ We will sometimes identify $\bbmC^n$ with $\bbmR^{2n}$ using the isomorphism 
+ \begin{align}
+  z \mapsto \left(\begin{array}{c} Re(z) \\ Im(z) \end{array}\right)
+ \end{align}
+ For fixed Hilbert space $\cH$, we equip the set $\cL^+(\cH)$ with a semiorder \footnote{A semiorder is distinguished from an order by lacking the trichotomy property, i.e. not all pairs of elements can be compared} trace $\geq$. We define for each two matrices $A,B \in \cL(\cH)$
+ \begin{align}
+  A \ \geq \ B \ :\Leftrightarrow A-B \ \text{positive semidefinite}.
+ \end{align}
+ The above definition also motivates to write $A \geq 0$ to indicate that $A$ is positive semidefinite. We have 
+ \begin{lemma}[Conjugation rule] \label{lemma:conjugation_rule}
+   Let $A,B$ be hermitian matrices, $C$ a matrix. It holds 
+   \begin{align*}
+    A \leq B \ \Rightarrow \ CAC^\ast \leq CBC^\ast.
+   \end{align*}
+  \end{lemma}
+ \end{section}
+ 
+ \begin{section}{Finite-valued random variables and random matrices}
+  The usual way, to establish events on a set $\Omega$ is to specify a \emph{$\sigma$-Algebra}. This is a family $\Sigma$ of subsets of $\Omega$ which has the following properties
+  \begin{itemize} 
+   \item $\emptyset,  \Omega \in \Sigma$, 
+   \item If $A, B \in \Sigma$, then $A \cap B \in \Sigma$, and 
+   \item If $A_1,A_2,\dots \in \Sigma$, $\bigcup_{i=1}^\infty \in \Sigma$.
+  \end{itemize}
+  A \emph{probability measure} is then a $\sigma$-additive set function, i.e. a function $\mu: \Sigma \rightarrow \bbmR$ such that 
+  \begin{itemize}
+   \item $\mu(\emptyset) = 0$ and $\mu(\Omega) = 1$, 
+   \item For each family $\{A_i\}_{i=1}^\infty \subset \Sigma$, $A_i \cap A_j = \emptyset$ $i \neq j$, $\mu(\bigcap_{i=1}^\infty A_i) = \sum_{i=1}^\infty \mu(A_i)$. 
+  \end{itemize}
+  The pair $(\Omega,\Sigma)$ is called a measureable space, the triple $(\Omega, \Sigma, \mu)$ is then called a \emph{probability space}. Let $(\Omega, \Sigma)$, $(\Omega', \Sigma')$ 
+  be two measurable spaces. A \emph{random variable} is a map $X: \Omega \rightarrow \Omega'$, such that $X^{-1}(A) \in \Sigma$ for each $A \in \Sigma'$. For each set $\Omega$, the power 
+  set forms a $\sigma$-algebra. If the set is not countable, however, the power set may be ``too large to be useful''. A standard $\sigma$-algebra for $\bbmR$ is the so-called \emph{Borel $\sigma$-algebra}, 
+  which is the smallest $\sigma$-algebra containing all open sets in $\bbmR$. 
+  All random quantities in this course will be assumed to have only a finite range of possible values, i.e. we assume $\Omega$ to be a finite set and implicitely work with the $\sigma$-algebra formed by the 
+  members of the power set. \\
+  Therefore, we will restrain from introducing the full measure-theoretic framework for probability. 
+  Instead introducing sigma algebras and measures on the formal levels, we note, that each probability law or ``probability distribution'' is uniquely determined by the values on the atomic sets. We therefore
+  define a probability distribution on a finite set $\cX$ to be function $p: \cX \rightarrow [0,1]$ such that $\sum_{x \in \cX} p(x) = 1$. The probability, that a random variable with distribution (or law) $p$ 
+  takes a value in a set $A \subset \cX$ is 
+  \begin{align}
+   \prob(X \in A) = \sum_{x \in A} p(x).
+  \end{align}
+  The expectation of $X$ is defined by 
+  \begin{align}
+   \bbmE X = \sum_{x \in \cX} p(x) x.
+  \end{align}
+   \begin{proposition}[Law of large numbers]
+    Let $X_1,X_2,\dots$ be an i.i.d. sequence of real random variables, $\delta > 0$. It holds
+    \begin{align}
+     \lim_{N \rightarrow \infty} \prob\left(\left| \frac{1}{N} \sum_{i=1}^N X_i - \bbmE X\right | \geq \delta \right) = 0. 
+    \end{align}
+   \end{proposition}
+ \end{section}
+
+ \begin{section}{Convex analysis} 
+A set $A \subset \bbmR^n$ is called \emph{convex} \index{set!convex} \index{convex!set}, if for each elements $x_1,\dots, x_N \in A$ and real numbers $\lambda_1,\dots \lambda_N \in [0,1]$
+ such that $\sum_{i=1}^N \lambda_i = 1$, the \emph{convex combination} \index{convex combination} 
+ \begin{align}
+  x = \sum_{i=1}^N \lambda_i x_i 
+ \end{align}
+ is also an element of $A$ (i.e. ``A is closed under forming finite convex combinations''). An element $x$ of a convex set $X \in \bbmR^n$ is called \emph{extremal}, if all convex combinations representing $x$ are trivial, i.e. if
+ for all $b_1, b_2 \in X$, $\lambda \in [0,1]$ either $b_1 = b_2 = x$ or $\lambda \in \{0,1\}$ holds. Let $A \subset \bbmR^d$ be a convex set. A function $f: A \rightarrow \bbmR$
+ is called \emph{convex} \index{convex!function} \index{function!convex}, if  
+ \begin{align}
+  f(\lambda a_1 + (1-\lambda) a_2) \leq \lambda f(a_1) + (1-\lambda) f(a_2) 
+ \end{align}
+ holds for all $a_1, a_2 \in A$, $\lambda \in [0,1]$. Moreover, $f$ is called \emph{concave} \index{concave!function} \index{function!concave}, if $-f$ is convex, and \emph{affine} \index{function!affine}, 
+ if it is convex and concave. We also will need the notion of a convex subset of $\bbmC^n$. In this case, nothing changes, because the map 
+ \begin{align}
+  z \mapsto \left(\begin{array}{c} Re(z) \\ Im(z) \end{array}\right)
+ \end{align}
+ is an affine bijection between $\bbmC$ and $\bbmR^2$.
+ \begin{proposition}[Jensen's inequality]
+  Let $\lambda_1, \dots, \lambda_N \in [0,1]$, $\sum_{i=1}^N \lambda_i =1$ and $x_1,\dots x_N \in \bbmR$. If $f$ is convex, it holds
+  \begin{align}
+   f(\lambda_1 x_1 + \dots + \lambda_N x_N) \ \leq \lambda_1 f(x_1) + \dots + \lambda_N f(x_N). 
+  \end{align}
+  In particular, if $X$ is a real random variable and $f$ a convex function, it holds
+   \begin{align}
+    f( \bbmE X ) \ \leq \bbmE f(X).
+   \end{align}
+ \end{proposition}
+\end{section}
+\begin{section}{Exercises}
+\begin{exercise}
+	Show, that the matrix product $AB$ of two Hermitian matrices $A,B$ is Hermitian if and only if $[A,B] = 0$.
+\end{exercise}
+\end{section}
+
+
