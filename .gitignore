@@ -1,3 +1,15 @@
 *.backup
 *.log
 *.gz
+*.aux
+*.bak
+*.bbl
+*.blg
+*.dvi
+*.pdf
+*.ilg
+*.ind
+*.fls
+*.idx
+*.fdb_latexmk
+*.toc
